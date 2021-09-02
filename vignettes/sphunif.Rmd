@@ -1,0 +1,207 @@
+---
+title: "`sphunif`: Uniformity Tests on the Circle, Sphere, and Hypersphere"
+author: "Eduardo García-Portugués and Thomas Verdebout"
+date: "`r Sys.Date()`, v`r packageVersion('sphunif')`"
+bibliography: sphunif.bib
+biblio-style: apalike-custom
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+    toc: yes
+vignette: >
+  %\VignetteIndexEntry{sphunif: Uniformity Tests on the Circle, Sphere, and Hypersphere}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Just give me a quick example!
+
+### Circular data
+
+Suppose that you want to test if a sample of *circular* data is uniformly distributed. For example, the following circular uniform sample in **radians**:
+
+```{r, cir_data}
+set.seed(987202226)
+cir_data <- runif(n = 30, min = 0, max = 2 * pi)
+```
+
+Then you can call the main function in the `sphunif` package, `unif_test`, specifying the `type` of test to be performed. For example, the Watson (omnibus) test:
+
+```{r, unif_test_cir}
+library(sphunif)
+unif_test(data = cir_data, type = "Watson") # An htest object
+```
+
+By default, the calibration of the test statistic is done by Monte Carlo. This can be changed with `p_value = "asymp"` to use the asymptotic distribution:
+
+```{r, asymp}
+unif_test(data = cir_data, type = "Watson", p_value = "MC") # Monte Carlo
+unif_test(data = cir_data, type = "Watson", p_value = "asymp") # Asymp. distr.
+```
+
+You can perform *several* tests within a *single* call to `unif_test`. Choose the available circular uniformity tests from
+
+```{r, avail_cir}
+avail_cir_tests
+```
+
+For example, you can use the Projected Anderson--Darling (@Garcia-Portugues2020b, also an omnibus test) test and the Watson test:
+
+```{r, unif_test_avail_cir}
+# A *list* of htest objects
+unif_test(data = cir_data, type = c("PAD", "Watson"))
+```
+
+@Garcia-Portugues2020a gives a review of different tests of uniformity on the circle. Section 5.1 in @Pewsey2021 also gives an overview of recent advances.
+
+### Spherical data
+
+Suppose now that you want to test if a sample of *spherical* data is uniformly distributed. Consider a *non*-uniformly-generated^[Uniformly-distributed polar coordinates do not translate into uniformly-distributed Cartesian coordinates!] sample of directions in **Cartesian coordinates**, such as:
+
+```{r, sph_data}
+# Sample data on S^2
+set.seed(987202226)
+theta <- runif(n = 30, min = 0, max = 2 * pi)
+phi <- runif(n = 30, min = 0, max = pi)
+sph_data <- cbind(cos(theta) * sin(phi), sin(theta) * sin(phi), cos(phi))
+```
+
+The available spherical uniformity tests:
+
+```{r, avail_sph}
+avail_sph_tests
+```
+
+See again @Garcia-Portugues2020a for a review of tests of uniformity on the sphere and complementary Section 5.1 in @Pewsey2021.
+
+The default `type = "all"` equals `type = avail_sph_tests`, which might be too much for standard analysis:
+
+```{r, unif_test_avail_sph}
+unif_test(data = sph_data, type = "all", p_value = "MC", M = 1e3)
+unif_test(data = sph_data, type = "Rayleigh", p_value = "asymp")
+```
+
+### Higher dimensions
+
+The *hyperspherical* setting is treated analogously to the spherical setting, and the available tests are exactly the same (`avail_sph_tests`). Here is an example of testing uniformity with a sample of size `100` on the $9$-sphere:
+
+```{r, hyp_data}
+# Sample data on S^9
+hyp_data <- r_unif_sph(n = 30, p = 10)
+
+# Test
+unif_test(data = hyp_data, type = "Rayleigh", p_value = "asymp")
+```
+
+## A data example: are Venusian craters uniformly distributed?
+
+The following snippet partially reproduces the data application in @Garcia-Portugues2021 on testing the uniformity of known Venusian craters. Incidentally, it also illustrates how to monitor the progress of a Monte Carlo simulation when `p_value = "MC"` using [progressr](https://progressr.futureverse.org).
+
+```{r, venus}
+# Load spherical data
+data(venus)
+head(venus)
+nrow(venus)
+
+# Compute Cartesian coordinates from polar coordinates
+venus$X <- cbind(cos(venus$theta) * cos(venus$phi),
+                 sin(venus$theta) * cos(venus$phi),
+                 sin(venus$phi))
+
+# Test uniformity using the Projected Cramér-von Mises and Projected
+# Anderson-Darling tests on S^2, both using asymptotic distributions
+unif_test(data = venus$X, type = c("PCvM", "PAD"), p_value = "asymp")
+
+# Define a handler for progressr
+require(progress)
+require(progressr)
+handlers(handler_progress(
+  format = ":spin [:bar] :percent Total: :elapsedfull End \u2248 :eta",
+  clear = FALSE))
+
+# Test uniformity using Monte-Carlo approximated null distributions
+with_progress(
+  unif_test(data = venus$X, type = c("PCvM", "PAD"),
+            p_value = "MC", chunks = 1e2, M = 5e2, cores = 2)
+)
+```
+
+## Simulation studies done simple
+
+`unif_stat` allows to compute several statistics to different samples within a single call, thus facilitating Monte Carlo experiments:
+
+```{r, unif_stat_vec}
+# M samples of size n on S^2
+samps_sph <- r_unif_sph(n = 30, p = 3, M = 10)
+
+# Apply all statistics to the M samples
+unif_stat(data = samps_sph, type = "all")
+```
+
+Additionally, `unif_stat_MC` is an utility for performing the previous simulation through a convenient parallel wrapper:
+
+```{r, MC}
+# Break the simulation in 10 chunks of tasks to be divided between 2 cores
+sim <- unif_stat_MC(n = 30, type = "all", p = 3, M = 1e4, cores = 2,
+                    chunks = 10)
+
+# Critical values for test statistics
+sim$crit_val_MC
+
+# Test statistics
+head(sim$stats_MC)
+
+# Power computation using a pre-built sampler for the alternative
+pow <- unif_stat_MC(n = 30, type = "all", p = 3, M = 1e4, cores = 2,
+                    chunks = 10, r_H1 = r_alt, crit_val = sim$crit_val_MC,
+                    alt = "vMF", kappa = 1)
+pow$power_MC
+
+# How to use a custom sampler according to ?unif_stat_MC
+r_H1 <- function(n, p, M, l = 1) {
+
+  samp <- array(dim = c(n, p, M))
+  for (j in 1:M) {
+
+    samp[, , j] <- mvtnorm::rmvnorm(n = n, mean = c(l, rep(0, p - 1)),
+                                    sigma = diag(rep(1, p)))
+    samp[, , j] <- samp[, , j] / sqrt(rowSums(samp[, , j]^2))
+
+  }
+  return(samp)
+
+}
+pow <- unif_stat_MC(n = 30, type = "all", p = 3, M = 1e2, cores = 2,
+                    chunks = 5, r_H1 = r_H1, crit_val = sim$crit_val_MC)
+pow$power_MC
+```
+
+`unif_stat_MC` can be used for constructing the Monte Carlo calibration necessary for `unif_test`, either for providing a rejection rule based on `$crit_val_MC` or for approximating the $p$-value by `$stats_MC`.
+
+```{r, crit_val}
+# Using precomputed critical values
+ht1 <- unif_test(data = samps_sph[, , 1], type = "Rayleigh",
+                 p_value = "crit_val", crit_val = sim$crit_val_MC)
+ht1
+ht1$reject
+
+# Using precomputed Monte Carlo statistics
+ht2 <- unif_test(data = samps_sph[, , 1], type = "Rayleigh",
+                 p_value = "MC", stats_MC = sim$stats_MC)
+ht2
+ht2$reject
+
+# Faster than
+unif_test(data = samps_sph[, , 1], type = "Rayleigh", p_value = "MC")
+```
+
+## References
+
