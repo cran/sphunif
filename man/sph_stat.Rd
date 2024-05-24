@@ -101,7 +101,7 @@ the CCF09 test.}
 
 \item{K_CCF09}{integer giving the truncation of the series present in the
 asymptotic distribution of the Kolmogorov-Smirnov statistic. Defaults to
-\code{5e2}.}
+\code{25}.}
 
 \item{original}{return the CCF09 statistic as originally defined?
 If \code{FALSE} (default), a faster and equivalent statistic is computed,
@@ -225,5 +225,5 @@ sph_stat_CJ12(Psi, regime = 3, Psi_in_X = TRUE, p = p)
 \references{
 García-Portugués, E. and Verdebout, T. (2018) An overview of uniformity
 tests on the hypersphere. \emph{arXiv:1804.00286}.
-\url{https://arxiv.org/abs/1804.00286}.
+\doi{10.48550/arXiv.1804.00286}.
 }

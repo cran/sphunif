@@ -105,7 +105,7 @@
 #' @references
 #' García-Portugués, E. and Verdebout, T. (2018) An overview of uniformity
 #' tests on the hypersphere. \emph{arXiv:1804.00286}.
-#' \url{https://arxiv.org/abs/1804.00286}.
+#' \doi{10.48550/arXiv.1804.00286}.
 #' @examples
 #' ## Sample uniform circular data
 #'
@@ -217,7 +217,7 @@
 #' # Riesz
 #' cir_stat_Riesz(Theta, s = 1)
 #' cir_stat_Riesz(Psi, Psi_in_Theta = TRUE, s = 1)
-#
+#'
 #' # Projected Cramér-von Mises
 #' cir_stat_PCvM(Theta)
 #' cir_stat_PCvM(Psi, Psi_in_Theta = TRUE)

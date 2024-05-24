@@ -362,7 +362,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore"><code>sphunif</code>: Uniformity Tests on
 the Circle, Sphere, and Hypersphere</h1>
 <h4 class="author">Eduardo García-Portugués and Thomas Verdebout</h4>
-<h4 class="date">2023-12-04, v1.3.0</h4>
+<h4 class="date">2024-05-24, v1.4.0</h4>
 
 
 <div id="TOC">
@@ -398,33 +398,36 @@ package, <code>unif_test</code>, specifying the <code>type</code> of
 test to be performed. For example, the Watson (omnibus) test:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(sphunif)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>) <span class="co"># An htest object</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;Rcpp&#39; was built under R version 4.2.3</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>) <span class="co"># An htest object</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
 <p>By default, the calibration of the test statistic is done by Monte
 Carlo. This can be changed with <code>p_value = &quot;asymp&quot;</code> to use
 the asymptotic distribution:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>, <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>) <span class="co"># Monte Carlo</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; Loading required package: future</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;doFuture&#39; was built under R version 4.2.3</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; Loading required package: future</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;future&#39; was built under R version 4.2.3</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8662</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>, <span class="at">p_value =</span> <span class="st">&quot;asymp&quot;</span>) <span class="co"># Asymp. distr.</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8662</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>, <span class="at">p_value =</span> <span class="st">&quot;asymp&quot;</span>) <span class="co"># Asymp. distr.</span></span>
 <span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
 <p>You can perform <em>several</em> tests within a <em>single</em> call
 to <code>unif_test</code>. Choose the available circular uniformity
 tests from</p>
@@ -439,7 +442,7 @@ tests from</p>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; [29] &quot;Sobolev&quot;        &quot;Softmax&quot;        &quot;Vacancy&quot;        &quot;Watson&quot;        </span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; [33] &quot;Watson_1976&quot;</span></span></code></pre></div>
 <p>For example, you can use the Projected Anderson–Darling (<span class="citation">García-Portugués, Navarro-Esteban, and Cuesta-Albertos
-(2020)</span>, also an omnibus test) test and the Watson test:</p>
+(2023)</span>, also an omnibus test) test and the Watson test:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># A *list* of htest objects</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PAD&quot;</span>, <span class="st">&quot;Watson&quot;</span>))</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; Series truncated from 10000 to 10000 terms (difference &lt;= 0 with the HBE tail probability; last weight = 1.137e-08).</span></span>
@@ -488,13 +491,13 @@ García-Portugués (2021)</span>.</p>
 <p>The default <code>type = &quot;all&quot;</code> equals
 <code>type = avail_sph_tests</code>, which might be too much for
 standard analysis:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> sph_data, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>, <span class="at">M =</span> <span class="fl">1e3</span>)</span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> sph_data, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>, <span class="at">M =</span> <span class="fl">1e2</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; $Ajne</span></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt;  Ajne test of spherical uniformity</span></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; statistic = 0.057937, p-value = 0.996</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; statistic = 0.057937, p-value = 1</span></span>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any non-axial alternative to spherical uniformity</span></span>
 <span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -503,7 +506,7 @@ standard analysis:</p>
 <span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt;  Bakshaev (2010) test of spherical uniformity</span></span>
 <span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; statistic = 1.0215, p-value = 0.623</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; statistic = 1.0215, p-value = 0.61</span></span>
 <span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
 <span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -512,7 +515,7 @@ standard analysis:</p>
 <span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt;  Bingham test of spherical uniformity</span></span>
 <span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#&gt; statistic = 17.573, p-value = 0.003</span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#&gt; statistic = 17.573, p-value &lt; 2.2e-16</span></span>
 <span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: scatter matrix different from constant</span></span>
 <span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -521,7 +524,7 @@ standard analysis:</p>
 <span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a><span class="co">#&gt;  Cuesta-Albertos et al. (2009) test of spherical uniformity with k = 50</span></span>
 <span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="co">#&gt; statistic = 1.1355, p-value = 0.755</span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="co">#&gt; statistic = 1.1355, p-value = 0.79</span></span>
 <span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
 <span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -530,7 +533,7 @@ standard analysis:</p>
 <span id="cb8-40"><a href="#cb8-40" tabindex="-1"></a><span class="co">#&gt;  Cai and Jiang (2012) test of spherical uniformity</span></span>
 <span id="cb8-41"><a href="#cb8-41" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-42"><a href="#cb8-42" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a><span class="co">#&gt; statistic = 19.442, p-value = 0.784</span></span>
+<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a><span class="co">#&gt; statistic = 19.442, p-value = 0.77</span></span>
 <span id="cb8-44"><a href="#cb8-44" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: unclear consistency</span></span>
 <span id="cb8-45"><a href="#cb8-45" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-46"><a href="#cb8-46" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -539,7 +542,7 @@ standard analysis:</p>
 <span id="cb8-49"><a href="#cb8-49" tabindex="-1"></a><span class="co">#&gt;  Gine&#39;s Fn test of spherical uniformity</span></span>
 <span id="cb8-50"><a href="#cb8-50" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-51"><a href="#cb8-51" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-52"><a href="#cb8-52" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5391, p-value = 0.387</span></span>
+<span id="cb8-52"><a href="#cb8-52" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5391, p-value = 0.43</span></span>
 <span id="cb8-53"><a href="#cb8-53" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
 <span id="cb8-54"><a href="#cb8-54" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-55"><a href="#cb8-55" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -548,7 +551,7 @@ standard analysis:</p>
 <span id="cb8-58"><a href="#cb8-58" tabindex="-1"></a><span class="co">#&gt;  Gine&#39;s Gn test of spherical uniformity</span></span>
 <span id="cb8-59"><a href="#cb8-59" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-60"><a href="#cb8-60" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-61"><a href="#cb8-61" tabindex="-1"></a><span class="co">#&gt; statistic = 1.3074, p-value = 0.002</span></span>
+<span id="cb8-61"><a href="#cb8-61" tabindex="-1"></a><span class="co">#&gt; statistic = 1.3074, p-value &lt; 2.2e-16</span></span>
 <span id="cb8-62"><a href="#cb8-62" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any axial alternative to spherical uniformity</span></span>
 <span id="cb8-63"><a href="#cb8-63" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-64"><a href="#cb8-64" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -557,7 +560,7 @@ standard analysis:</p>
 <span id="cb8-67"><a href="#cb8-67" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
 <span id="cb8-68"><a href="#cb8-68" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-69"><a href="#cb8-69" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-70"><a href="#cb8-70" tabindex="-1"></a><span class="co">#&gt; statistic = 0.91653, p-value = 0.493</span></span>
+<span id="cb8-70"><a href="#cb8-70" tabindex="-1"></a><span class="co">#&gt; statistic = 0.91653, p-value = 0.52</span></span>
 <span id="cb8-71"><a href="#cb8-71" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
 <span id="cb8-72"><a href="#cb8-72" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-73"><a href="#cb8-73" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -566,7 +569,7 @@ standard analysis:</p>
 <span id="cb8-76"><a href="#cb8-76" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
 <span id="cb8-77"><a href="#cb8-77" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-78"><a href="#cb8-78" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-79"><a href="#cb8-79" tabindex="-1"></a><span class="co">#&gt; statistic = 0.12769, p-value = 0.623</span></span>
+<span id="cb8-79"><a href="#cb8-79" tabindex="-1"></a><span class="co">#&gt; statistic = 0.12769, p-value = 0.61</span></span>
 <span id="cb8-80"><a href="#cb8-80" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
 <span id="cb8-81"><a href="#cb8-81" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-82"><a href="#cb8-82" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -575,7 +578,7 @@ standard analysis:</p>
 <span id="cb8-85"><a href="#cb8-85" tabindex="-1"></a><span class="co">#&gt;  Poisson-kernel test of spherical uniformity with rho = 0.5</span></span>
 <span id="cb8-86"><a href="#cb8-86" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-87"><a href="#cb8-87" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-88"><a href="#cb8-88" tabindex="-1"></a><span class="co">#&gt; statistic = 1.4961, p-value = 0.155</span></span>
+<span id="cb8-88"><a href="#cb8-88" tabindex="-1"></a><span class="co">#&gt; statistic = 0.24935, p-value = 0.13</span></span>
 <span id="cb8-89"><a href="#cb8-89" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity for rho &gt; 0</span></span>
 <span id="cb8-90"><a href="#cb8-90" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-91"><a href="#cb8-91" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -584,7 +587,7 @@ standard analysis:</p>
 <span id="cb8-94"><a href="#cb8-94" tabindex="-1"></a><span class="co">#&gt;  Projected Rothman test of spherical uniformity with t = 0.333</span></span>
 <span id="cb8-95"><a href="#cb8-95" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-96"><a href="#cb8-96" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-97"><a href="#cb8-97" tabindex="-1"></a><span class="co">#&gt; statistic = 0.15523, p-value = 0.656</span></span>
+<span id="cb8-97"><a href="#cb8-97" tabindex="-1"></a><span class="co">#&gt; statistic = 0.15523, p-value = 0.64</span></span>
 <span id="cb8-98"><a href="#cb8-98" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity if t is irrational</span></span>
 <span id="cb8-99"><a href="#cb8-99" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-100"><a href="#cb8-100" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -593,7 +596,7 @@ standard analysis:</p>
 <span id="cb8-103"><a href="#cb8-103" tabindex="-1"></a><span class="co">#&gt;  Pycke test of spherical uniformity</span></span>
 <span id="cb8-104"><a href="#cb8-104" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-105"><a href="#cb8-105" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-106"><a href="#cb8-106" tabindex="-1"></a><span class="co">#&gt; statistic = 0.042839, p-value = 0.304</span></span>
+<span id="cb8-106"><a href="#cb8-106" tabindex="-1"></a><span class="co">#&gt; statistic = 0.042839, p-value = 0.3</span></span>
 <span id="cb8-107"><a href="#cb8-107" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
 <span id="cb8-108"><a href="#cb8-108" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-109"><a href="#cb8-109" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -602,7 +605,7 @@ standard analysis:</p>
 <span id="cb8-112"><a href="#cb8-112" tabindex="-1"></a><span class="co">#&gt;  Finite Sobolev test of spherical uniformity with vk2 = c(0, 0, 1)</span></span>
 <span id="cb8-113"><a href="#cb8-113" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-114"><a href="#cb8-114" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-115"><a href="#cb8-115" tabindex="-1"></a><span class="co">#&gt; statistic = 4.3066, p-value = 0.757</span></span>
+<span id="cb8-115"><a href="#cb8-115" tabindex="-1"></a><span class="co">#&gt; statistic = 4.3066, p-value = 0.72</span></span>
 <span id="cb8-116"><a href="#cb8-116" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: alternatives in the spherical harmonics subspace with vk2 ≠ 0</span></span>
 <span id="cb8-117"><a href="#cb8-117" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-118"><a href="#cb8-118" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -611,7 +614,7 @@ standard analysis:</p>
 <span id="cb8-121"><a href="#cb8-121" tabindex="-1"></a><span class="co">#&gt;  Softmax test of spherical uniformit with kappa = 1</span></span>
 <span id="cb8-122"><a href="#cb8-122" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-123"><a href="#cb8-123" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-124"><a href="#cb8-124" tabindex="-1"></a><span class="co">#&gt; statistic = -0.065236, p-value = 0.485</span></span>
+<span id="cb8-124"><a href="#cb8-124" tabindex="-1"></a><span class="co">#&gt; statistic = -0.065236, p-value = 0.53</span></span>
 <span id="cb8-125"><a href="#cb8-125" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity for kappa &gt; 0</span></span>
 <span id="cb8-126"><a href="#cb8-126" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-127"><a href="#cb8-127" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -620,7 +623,7 @@ standard analysis:</p>
 <span id="cb8-130"><a href="#cb8-130" tabindex="-1"></a><span class="co">#&gt;  Stereographic projection test of spherical uniformity with a = 0</span></span>
 <span id="cb8-131"><a href="#cb8-131" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-132"><a href="#cb8-132" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-133"><a href="#cb8-133" tabindex="-1"></a><span class="co">#&gt; statistic = 3.2993, p-value = 0.157</span></span>
+<span id="cb8-133"><a href="#cb8-133" tabindex="-1"></a><span class="co">#&gt; statistic = 3.2993, p-value = 0.17</span></span>
 <span id="cb8-134"><a href="#cb8-134" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity for |a| &lt; 1</span></span>
 <span id="cb8-135"><a href="#cb8-135" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-136"><a href="#cb8-136" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -647,7 +650,7 @@ standard analysis:</p>
 <span id="cb8-157"><a href="#cb8-157" tabindex="-1"></a><span class="co">#&gt;  Warning! This is an experimental test not meant to be used with s = 1</span></span>
 <span id="cb8-158"><a href="#cb8-158" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb8-159"><a href="#cb8-159" tabindex="-1"></a><span class="co">#&gt; data:  sph_data</span></span>
-<span id="cb8-160"><a href="#cb8-160" tabindex="-1"></a><span class="co">#&gt; statistic = 1.0215, p-value = 0.623</span></span>
+<span id="cb8-160"><a href="#cb8-160" tabindex="-1"></a><span class="co">#&gt; statistic = 1.0215, p-value = 0.61</span></span>
 <span id="cb8-161"><a href="#cb8-161" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: unclear, experimental test</span></span>
 <span id="cb8-162"><a href="#cb8-162" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> sph_data, <span class="at">type =</span> <span class="st">&quot;Rayleigh&quot;</span>, <span class="at">p_value =</span> <span class="st">&quot;asymp&quot;</span>)</span>
 <span id="cb8-163"><a href="#cb8-163" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -727,33 +730,35 @@ using <a href="https://progressr.futureverse.org">progressr</a>.</p>
 <span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a><span class="co"># Define a handler for progressr</span></span>
 <span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a><span class="fu">require</span>(progress)</span>
 <span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a><span class="co">#&gt; Loading required package: progress</span></span>
-<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a><span class="fu">require</span>(progressr)</span>
-<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a><span class="co">#&gt; Loading required package: progressr</span></span>
-<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a><span class="fu">handlers</span>(<span class="fu">handler_progress</span>(</span>
-<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">&quot;:spin [:bar] :percent Total: :elapsedfull End \u2248 :eta&quot;</span>,</span>
-<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a>  <span class="at">clear =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a></span>
-<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a><span class="co"># Test uniformity using Monte-Carlo approximated null distributions</span></span>
-<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a><span class="fu">with_progress</span>(</span>
-<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a>  <span class="fu">unif_test</span>(<span class="at">data =</span> venus<span class="sc">$</span>X, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PCvM&quot;</span>, <span class="st">&quot;PAD&quot;</span>),</span>
-<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a>            <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>, <span class="at">chunks =</span> <span class="fl">1e2</span>, <span class="at">M =</span> <span class="fl">5e2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
-<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a>)</span>
-<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
-<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;progress&#39; was built under R version 4.2.3</span></span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a><span class="fu">require</span>(progressr)</span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a><span class="co">#&gt; Loading required package: progressr</span></span>
+<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a><span class="fu">handlers</span>(<span class="fu">handler_progress</span>(</span>
+<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">paste</span>(<span class="st">&quot;(:spin) [:bar] :percent Iter: :current/:total Rate:&quot;</span>,</span>
+<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a>                 <span class="st">&quot;:tick_rate iter/sec ETA: :eta Elapsed: :elapsedfull&quot;</span>),</span>
+<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a>  <span class="at">clear =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a></span>
+<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a><span class="co"># Test uniformity using Monte-Carlo approximated null distributions</span></span>
+<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a><span class="fu">with_progress</span>(</span>
+<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a>  <span class="fu">unif_test</span>(<span class="at">data =</span> venus<span class="sc">$</span>X, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PCvM&quot;</span>, <span class="st">&quot;PAD&quot;</span>),</span>
+<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a>            <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>, <span class="at">chunks =</span> <span class="fl">1e2</span>, <span class="at">M =</span> <span class="fl">5e2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a>)</span>
+<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
 <span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.116</span></span>
-<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
-<span id="cb10-62"><a href="#cb10-62" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-63"><a href="#cb10-63" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-64"><a href="#cb10-64" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
+<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
+<span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-62"><a href="#cb10-62" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.116</span></span>
+<span id="cb10-63"><a href="#cb10-63" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
+<span id="cb10-64"><a href="#cb10-64" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb10-65"><a href="#cb10-65" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-66"><a href="#cb10-66" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
+<span id="cb10-66"><a href="#cb10-66" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
 <span id="cb10-67"><a href="#cb10-67" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-68"><a href="#cb10-68" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-69"><a href="#cb10-69" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.104</span></span>
-<span id="cb10-70"><a href="#cb10-70" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span></code></pre></div>
+<span id="cb10-68"><a href="#cb10-68" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
+<span id="cb10-69"><a href="#cb10-69" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-70"><a href="#cb10-70" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-71"><a href="#cb10-71" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.104</span></span>
+<span id="cb10-72"><a href="#cb10-72" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span></code></pre></div>
 </div>
 <div id="simulation-studies-done-simple" class="section level2">
 <h2>Simulation studies done simple</h2>
@@ -777,16 +782,16 @@ experiments:</p>
 <span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; 9  0.26937836 1.3273645 3.5939142 1.5021719 21.16927 1.4685129 0.3909994</span></span>
 <span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt; 10 0.20070040 1.2037837 6.2135243 1.3720805 24.17573 1.4248372 0.6220356</span></span>
 <span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co">#&gt;          PAD       PCvM     Poisson       PRt        Pycke   Sobolev</span></span>
-<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="co">#&gt; 1  0.9395839 0.15925304 -0.57558355 0.2167113 -0.022374854  4.055000</span></span>
-<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="co">#&gt; 2  0.5945587 0.08465719 -1.21057040 0.1096982 -0.106597617  2.585482</span></span>
-<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt; 3  0.8936470 0.14653849 -0.41084583 0.1945375 -0.017132971  7.166466</span></span>
-<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co">#&gt; 4  0.7531209 0.12354120 -1.29307400 0.1638546 -0.082808626  5.534846</span></span>
-<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a><span class="co">#&gt; 5  1.2281411 0.21401791  0.45232579 0.3046020  0.072236131  3.816622</span></span>
-<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co">#&gt; 6  1.7442098 0.31267737  2.48260823 0.4279620  0.177738562 10.600319</span></span>
-<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="co">#&gt; 7  1.3082009 0.22718781  1.00822132 0.3062035  0.104767601  9.554070</span></span>
-<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="co">#&gt; 8  0.7010165 0.10748545 -0.62564687 0.1337058 -0.056249730 13.999276</span></span>
-<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a><span class="co">#&gt; 9  0.9970355 0.16592056  0.06934756 0.2155874  0.001478758 11.847208</span></span>
-<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt; 10 0.9429167 0.15047296  0.17326907 0.2031502  0.025172789  4.733793</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="co">#&gt; 1  0.9395839 0.15925304 -0.09593059 0.2167113 -0.022374854  4.055000</span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="co">#&gt; 2  0.5945587 0.08465719 -0.20176173 0.1096982 -0.106597617  2.585482</span></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt; 3  0.8936470 0.14653849 -0.06847430 0.1945375 -0.017132971  7.166466</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co">#&gt; 4  0.7531209 0.12354120 -0.21551233 0.1638546 -0.082808626  5.534846</span></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a><span class="co">#&gt; 5  1.2281411 0.21401791  0.07538763 0.3046020  0.072236131  3.816622</span></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co">#&gt; 6  1.7442098 0.31267737  0.41376804 0.4279620  0.177738562 10.600319</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="co">#&gt; 7  1.3082009 0.22718781  0.16803689 0.3062035  0.104767601  9.554070</span></span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="co">#&gt; 8  0.7010165 0.10748545 -0.10427448 0.1337058 -0.056249730 13.999276</span></span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a><span class="co">#&gt; 9  0.9970355 0.16592056  0.01155793 0.2155874  0.001478758 11.847208</span></span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt; 10 0.9429167 0.15047296  0.02887818 0.2031502  0.025172789  4.733793</span></span>
 <span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt;        Softmax      Stereo  Rayleigh  Rayleigh_HD     Riesz</span></span>
 <span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co">#&gt; 1  -0.04452033  0.97559309 3.1198646  0.048934523 1.2740243</span></span>
 <span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co">#&gt; 2  -0.31080002 -3.43368909 0.4292885 -1.049488573 0.6772576</span></span>
@@ -801,40 +806,40 @@ experiments:</p>
 <p>Additionally, <code>unif_stat_MC</code> is an utility for performing
 the previous simulation through a convenient parallel wrapper:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Break the simulation in 10 chunks of tasks to be divided between 2 cores</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e4</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e2</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>                    <span class="at">chunks =</span> <span class="dv">10</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># Critical values for test statistics</span></span>
 <span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>sim<span class="sc">$</span>crit_val_MC</span>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt;           Ajne Bakshaev   Bingham    CCF09     CJ12  Gine_Fn   Gine_Gn      PAD</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; 0.1  0.4536825 2.206532  9.128344 1.659555 25.98066 2.349693 0.7576948 1.557836</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co">#&gt; 0.05 0.5391082 2.600789 10.930555 1.774889 26.73748 2.705124 0.8794850 1.794267</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">#&gt; 0.01 0.7332756 3.431860 14.964214 1.992331 27.95629 3.499274 1.1386400 2.320828</span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co">#&gt;           PCvM  Poisson       PRt     Pycke  Sobolev   Softmax    Stereo</span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="co">#&gt; 0.1  0.2758165 2.026086 0.3831610 0.1488173 11.94914 0.4475735  4.789295</span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co">#&gt; 0.05 0.3250987 2.835183 0.4533819 0.2139743 13.95774 0.6426233  7.277562</span></span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co">#&gt; 0.01 0.4289825 4.639202 0.6043427 0.3548239 18.42054 1.0694617 14.476883</span></span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">#&gt;       Rayleigh Rayleigh_HD    Riesz</span></span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt; 0.1   6.254501    1.328645 2.206532</span></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt; 0.05  7.659546    1.902252 2.600789</span></span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt; 0.01 10.709374    3.147339 3.431860</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; 0.1  0.3985377 1.900965  9.641849 1.607723 25.76571 2.071965 0.7824702 1.370771</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co">#&gt; 0.05 0.4293123 2.119489 10.883988 1.673388 26.04390 2.208151 0.9104627 1.439705</span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">#&gt; 0.01 0.4862980 2.367336 12.929769 1.768780 27.71544 2.509586 0.9826411 1.663297</span></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co">#&gt;           PCvM   Poisson       PRt      Pycke  Sobolev   Softmax   Stereo</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="co">#&gt; 0.1  0.2376206 0.2275968 0.3364439 0.09537109 10.79428 0.3209408 4.763500</span></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co">#&gt; 0.05 0.2649362 0.3387827 0.3719113 0.12780765 12.55933 0.3995652 6.189260</span></span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co">#&gt; 0.01 0.2959170 0.4855194 0.4103732 0.21006212 17.63509 0.5294922 9.170729</span></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">#&gt;      Rayleigh Rayleigh_HD    Riesz</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt; 0.1  5.348216   0.9586553 1.900965</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt; 0.05 5.977951   1.2157434 2.119489</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt; 0.01 6.686576   1.5050384 2.367336</span></span>
 <span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a></span>
 <span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="co"># Test statistics</span></span>
 <span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a><span class="fu">head</span>(sim<span class="sc">$</span>stats_MC)</span>
 <span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a><span class="co">#&gt;         Ajne  Bakshaev   Bingham    CCF09     CJ12   Gine_Fn   Gine_Gn</span></span>
-<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="co">#&gt; 1 0.21694040 1.0775492  2.453843 1.161116 25.66338 1.1994472 0.3316856</span></span>
-<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="co">#&gt; 2 0.12807204 0.7713214  4.378542 1.002687 22.82851 0.9488295 0.4365413</span></span>
-<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a><span class="co">#&gt; 3 0.29297019 1.3318434  1.809964 1.475809 23.17901 1.4254091 0.2535283</span></span>
-<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a><span class="co">#&gt; 4 0.08683535 0.7481899  6.545450 1.050452 16.60092 1.0029567 0.6556153</span></span>
-<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a><span class="co">#&gt; 5 0.23053105 1.5359203 12.536621 1.425933 15.47708 1.9035017 0.9813775</span></span>
-<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="co">#&gt; 6 0.22807235 1.1421569  3.120667 1.088024 25.84960 1.2559271 0.3436377</span></span>
-<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="co">#&gt;         PAD       PCvM    Poisson       PRt       Pycke   Sobolev     Softmax</span></span>
-<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co">#&gt; 1 0.8240941 0.13469365 -0.7001860 0.1761758 -0.05307337  9.007942 -0.15359967</span></span>
-<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#&gt; 2 0.6362508 0.09641517 -1.3265455 0.1188851 -0.10675328  7.122146 -0.28051417</span></span>
-<span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="co">#&gt; 3 0.9845993 0.16648043 -0.1365134 0.2125231 -0.01783641 15.989324 -0.02079736</span></span>
-<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a><span class="co">#&gt; 4 0.6549005 0.09352374 -0.5870966 0.1193201 -0.07731601  6.343550 -0.29460718</span></span>
-<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a><span class="co">#&gt; 5 1.2113886 0.19199003  1.8253072 0.2476503  0.14422646  6.006292  0.13450569</span></span>
-<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="co">#&gt; 6 0.8495502 0.14276961 -0.9669085 0.1881344 -0.07465451  6.871270 -0.09297427</span></span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="co">#&gt; 1 0.21694040 1.0775492  2.453843 1.259021 25.66338 1.1994472 0.3316856</span></span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="co">#&gt; 2 0.12807204 0.7713214  4.378542 1.050875 22.82851 0.9488295 0.4365413</span></span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a><span class="co">#&gt; 3 0.29297019 1.3318434  1.809964 1.606800 23.17901 1.4254091 0.2535283</span></span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a><span class="co">#&gt; 4 0.08683535 0.7481899  6.545450 1.100101 16.60092 1.0029567 0.6556153</span></span>
+<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a><span class="co">#&gt; 5 0.23053105 1.5359203 12.536621 1.250269 15.47708 1.9035017 0.9813775</span></span>
+<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="co">#&gt; 6 0.22807235 1.1421569  3.120667 1.267351 25.84960 1.2559271 0.3436377</span></span>
+<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="co">#&gt;         PAD       PCvM     Poisson       PRt       Pycke   Sobolev     Softmax</span></span>
+<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co">#&gt; 1 0.8240941 0.13469365 -0.11669766 0.1761758 -0.05307337  9.007942 -0.15359967</span></span>
+<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#&gt; 2 0.6362508 0.09641517 -0.22109092 0.1188851 -0.10675328  7.122146 -0.28051417</span></span>
+<span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="co">#&gt; 3 0.9845993 0.16648043 -0.02275223 0.2125231 -0.01783641 15.989324 -0.02079736</span></span>
+<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a><span class="co">#&gt; 4 0.6549005 0.09352374 -0.09784943 0.1193201 -0.07731601  6.343550 -0.29460718</span></span>
+<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a><span class="co">#&gt; 5 1.2113886 0.19199003  0.30421787 0.2476503  0.14422646  6.006292  0.13450569</span></span>
+<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="co">#&gt; 6 0.8495502 0.14276961 -0.16115142 0.1881344 -0.07465451  6.871270 -0.09297427</span></span>
 <span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a><span class="co">#&gt;      Stereo  Rayleigh Rayleigh_HD     Riesz</span></span>
 <span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a><span class="co">#&gt; 1 -2.187542 2.3063524 -0.28318046 1.0775492</span></span>
 <span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a><span class="co">#&gt; 2 -3.742812 1.0530639 -0.79483333 0.7713214</span></span>
@@ -844,18 +849,18 @@ the previous simulation through a convenient parallel wrapper:</p>
 <span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a><span class="co">#&gt; 6 -4.153019 2.6935451 -0.12510970 1.1421569</span></span>
 <span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a></span>
 <span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a><span class="co"># Power computation using a pre-built sampler for the alternative</span></span>
-<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e4</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
+<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e2</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
 <span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a>                    <span class="at">chunks =</span> <span class="dv">10</span>, <span class="at">r_H1 =</span> r_alt, <span class="at">crit_val =</span> sim<span class="sc">$</span>crit_val_MC,</span>
 <span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a>                    <span class="at">alt =</span> <span class="st">&quot;vMF&quot;</span>, <span class="at">kappa =</span> <span class="dv">1</span>)</span>
 <span id="cb12-48"><a href="#cb12-48" tabindex="-1"></a>pow<span class="sc">$</span>power_MC</span>
-<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a><span class="co">#&gt;        Ajne Bakshaev Bingham  CCF09   CJ12 Gine_Fn Gine_Gn    PAD   PCvM</span></span>
-<span id="cb12-50"><a href="#cb12-50" tabindex="-1"></a><span class="co">#&gt; 0.1  0.8180   0.8181  0.1379 0.7657 0.0945  0.8074  0.1405 0.8114 0.8181</span></span>
-<span id="cb12-51"><a href="#cb12-51" tabindex="-1"></a><span class="co">#&gt; 0.05 0.7305   0.7201  0.0786 0.6414 0.0467  0.7143  0.0791 0.7186 0.7201</span></span>
-<span id="cb12-52"><a href="#cb12-52" tabindex="-1"></a><span class="co">#&gt; 0.01 0.5083   0.4991  0.0186 0.4061 0.0099  0.4909  0.0182 0.4963 0.4991</span></span>
-<span id="cb12-53"><a href="#cb12-53" tabindex="-1"></a><span class="co">#&gt;      Poisson    PRt  Pycke Sobolev Softmax Stereo Rayleigh Rayleigh_HD  Riesz</span></span>
-<span id="cb12-54"><a href="#cb12-54" tabindex="-1"></a><span class="co">#&gt; 0.1   0.7545 0.8197 0.7903  0.1036  0.8153 0.5764   0.8181      0.8181 0.8181</span></span>
-<span id="cb12-55"><a href="#cb12-55" tabindex="-1"></a><span class="co">#&gt; 0.05  0.6495 0.7248 0.6891  0.0501  0.7197 0.4029   0.7275      0.7275 0.7201</span></span>
-<span id="cb12-56"><a href="#cb12-56" tabindex="-1"></a><span class="co">#&gt; 0.01  0.4222 0.5061 0.4555  0.0084  0.4954 0.1135   0.5099      0.5099 0.4991</span></span>
+<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a><span class="co">#&gt;      Ajne Bakshaev Bingham CCF09 CJ12 Gine_Fn Gine_Gn  PAD PCvM Poisson  PRt</span></span>
+<span id="cb12-50"><a href="#cb12-50" tabindex="-1"></a><span class="co">#&gt; 0.1  0.90     0.91    0.12  0.82 0.11    0.85    0.14 0.89 0.91    0.86 0.89</span></span>
+<span id="cb12-51"><a href="#cb12-51" tabindex="-1"></a><span class="co">#&gt; 0.05 0.84     0.85    0.09  0.78 0.10    0.84    0.08 0.85 0.85    0.77 0.85</span></span>
+<span id="cb12-52"><a href="#cb12-52" tabindex="-1"></a><span class="co">#&gt; 0.01 0.77     0.77    0.03  0.66 0.01    0.78    0.03 0.77 0.77    0.63 0.80</span></span>
+<span id="cb12-53"><a href="#cb12-53" tabindex="-1"></a><span class="co">#&gt;      Pycke Sobolev Softmax Stereo Rayleigh Rayleigh_HD Riesz</span></span>
+<span id="cb12-54"><a href="#cb12-54" tabindex="-1"></a><span class="co">#&gt; 0.1   0.89    0.11    0.87   0.58     0.90        0.90  0.91</span></span>
+<span id="cb12-55"><a href="#cb12-55" tabindex="-1"></a><span class="co">#&gt; 0.05  0.84    0.08    0.85   0.48     0.83        0.83  0.85</span></span>
+<span id="cb12-56"><a href="#cb12-56" tabindex="-1"></a><span class="co">#&gt; 0.01  0.67    0.02    0.77   0.30     0.78        0.78  0.77</span></span>
 <span id="cb12-57"><a href="#cb12-57" tabindex="-1"></a></span>
 <span id="cb12-58"><a href="#cb12-58" tabindex="-1"></a><span class="co"># How to use a custom sampler according to ?unif_stat_MC</span></span>
 <span id="cb12-59"><a href="#cb12-59" tabindex="-1"></a>r_H1 <span class="ot">&lt;-</span> <span class="cf">function</span>(n, p, M, <span class="at">l =</span> <span class="dv">1</span>) {</span>
@@ -874,14 +879,14 @@ the previous simulation through a convenient parallel wrapper:</p>
 <span id="cb12-72"><a href="#cb12-72" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e2</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
 <span id="cb12-73"><a href="#cb12-73" tabindex="-1"></a>                    <span class="at">chunks =</span> <span class="dv">5</span>, <span class="at">r_H1 =</span> r_H1, <span class="at">crit_val =</span> sim<span class="sc">$</span>crit_val_MC)</span>
 <span id="cb12-74"><a href="#cb12-74" tabindex="-1"></a>pow<span class="sc">$</span>power_MC</span>
-<span id="cb12-75"><a href="#cb12-75" tabindex="-1"></a><span class="co">#&gt;      Ajne Bakshaev Bingham CCF09 CJ12 Gine_Fn Gine_Gn  PAD PCvM Poisson  PRt</span></span>
-<span id="cb12-76"><a href="#cb12-76" tabindex="-1"></a><span class="co">#&gt; 0.1  0.99     0.99    0.47  0.99 0.08    0.99    0.47 0.99 0.99    0.99 0.99</span></span>
-<span id="cb12-77"><a href="#cb12-77" tabindex="-1"></a><span class="co">#&gt; 0.05 0.99     0.99    0.35  0.97 0.06    0.99    0.31 0.99 0.99    0.98 0.99</span></span>
-<span id="cb12-78"><a href="#cb12-78" tabindex="-1"></a><span class="co">#&gt; 0.01 0.97     0.96    0.17  0.93 0.01    0.96    0.12 0.96 0.96    0.93 0.97</span></span>
+<span id="cb12-75"><a href="#cb12-75" tabindex="-1"></a><span class="co">#&gt;      Ajne Bakshaev Bingham CCF09 CJ12 Gine_Fn Gine_Gn PAD PCvM Poisson PRt</span></span>
+<span id="cb12-76"><a href="#cb12-76" tabindex="-1"></a><span class="co">#&gt; 0.1     1        1    0.36     1 0.09       1    0.37   1    1       1   1</span></span>
+<span id="cb12-77"><a href="#cb12-77" tabindex="-1"></a><span class="co">#&gt; 0.05    1        1    0.29     1 0.08       1    0.24   1    1       1   1</span></span>
+<span id="cb12-78"><a href="#cb12-78" tabindex="-1"></a><span class="co">#&gt; 0.01    1        1    0.15     1 0.01       1    0.21   1    1       1   1</span></span>
 <span id="cb12-79"><a href="#cb12-79" tabindex="-1"></a><span class="co">#&gt;      Pycke Sobolev Softmax Stereo Rayleigh Rayleigh_HD Riesz</span></span>
-<span id="cb12-80"><a href="#cb12-80" tabindex="-1"></a><span class="co">#&gt; 0.1   0.99    0.11    0.99   0.97     0.99        0.99  0.99</span></span>
-<span id="cb12-81"><a href="#cb12-81" tabindex="-1"></a><span class="co">#&gt; 0.05  0.99    0.03    0.99   0.90     0.99        0.99  0.99</span></span>
-<span id="cb12-82"><a href="#cb12-82" tabindex="-1"></a><span class="co">#&gt; 0.01  0.94    0.01    0.96   0.65     0.97        0.97  0.96</span></span></code></pre></div>
+<span id="cb12-80"><a href="#cb12-80" tabindex="-1"></a><span class="co">#&gt; 0.1      1    0.21       1   0.97        1           1     1</span></span>
+<span id="cb12-81"><a href="#cb12-81" tabindex="-1"></a><span class="co">#&gt; 0.05     1    0.13       1   0.94        1           1     1</span></span>
+<span id="cb12-82"><a href="#cb12-82" tabindex="-1"></a><span class="co">#&gt; 0.01     1    0.03       1   0.82        1           1     1</span></span></code></pre></div>
 <p><code>unif_stat_MC</code> can be used for constructing the Monte
 Carlo calibration necessary for <code>unif_test</code>, either for
 providing a rejection rule based on <code>$crit_val_MC</code> or for
@@ -909,7 +914,7 @@ approximating the <span class="math inline">\(p\)</span>-value by
 <span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt;  Rayleigh test of spherical uniformity</span></span>
 <span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; data:  samps_sph[, , 1]</span></span>
-<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt; statistic = 3.1199, p-value = 0.9998</span></span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt; statistic = 3.1199, p-value = 0.98</span></span>
 <span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: mean direction different from zero</span></span>
 <span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a>ht2<span class="sc">$</span>reject</span>
 <span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;  0.1 0.05 0.01 </span></span>
@@ -927,19 +932,19 @@ approximating the <span class="math inline">\(p\)</span>-value by
 <div id="references" class="section level2 unnumbered">
 <h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Garcia-Portugues2020b" class="csl-entry">
-García-Portugués, E., P. Navarro-Esteban, and J. A. Cuesta-Albertos.
-2020. <span>“On a Projection-Based Class of Uniformity Tests on the
-Hypersphere.”</span> <em>arXiv:2008.09897</em>. <a href="https://arxiv.org/abs/2008.09897">https://arxiv.org/abs/2008.09897</a>.
-</div>
 <div id="ref-Garcia-Portugues2021" class="csl-entry">
-———. 2021. <span>“A <span>C</span>ramér–von <span>M</span>ises Test of
+García-Portugués, E., P. Navarro-Esteban, and J. A. Cuesta-Albertos.
+2021. <span>“A <span>C</span>ramér–von <span>M</span>ises Test of
 Uniformity on the Hypersphere.”</span> In <em>Statistical Learning and
 Modeling in Data Analysis</em>, edited by S. Balzano, G. C. Porzio, R.
 Salvatore, D. Vistocco, and M. Vichi, 107–16. Studies in Classification,
 Data Analysis and Knowledge Organization. Cham: Springer. <a href="https://doi.org/10.1007/978-3-030-69944-4_12">https://doi.org/10.1007/978-3-030-69944-4_12</a>.
 </div>
-<div id="ref-Garcia-Portugues2020a" class="csl-entry">
+<div id="ref-Garcia-Portugues2023" class="csl-entry">
+———. 2023. <span>“On a Projection-Based Class of Uniformity Tests on the
+Hypersphere.”</span> <em>Bernoulli</em> 29 (1): 181–204. <a href="https://doi.org/10.3150/21-BEJ1454">https://doi.org/10.3150/21-BEJ1454</a>.
+</div>
+<div id="ref-Garcia-Portugues2018" class="csl-entry">
 García-Portugués, E., and T. Verdebout. 2018. <span>“A Review of
 Uniformity Tests on the Hypersphere.”</span> <em>arXiv:1804.00286</em>.
 <a href="https://arxiv.org/abs/1804.00286">https://arxiv.org/abs/1804.00286</a>.

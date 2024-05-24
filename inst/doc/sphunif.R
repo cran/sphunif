@@ -35,7 +35,7 @@ sph_data <- cbind(cos(theta) * sin(phi), sin(theta) * sin(phi), cos(phi))
 avail_sph_tests
 
 ## ----unif_test_avail_sph------------------------------------------------------
-unif_test(data = sph_data, type = "all", p_value = "MC", M = 1e3)
+unif_test(data = sph_data, type = "all", p_value = "MC", M = 1e2)
 unif_test(data = sph_data, type = "Rayleigh", p_value = "asymp")
 
 ## ----hyp_data-----------------------------------------------------------------
@@ -64,7 +64,8 @@ unif_test(data = venus$X, type = c("PCvM", "PAD"), p_value = "asymp")
 require(progress)
 require(progressr)
 handlers(handler_progress(
-  format = ":spin [:bar] :percent Total: :elapsedfull End \u2248 :eta",
+  format = paste("(:spin) [:bar] :percent Iter: :current/:total Rate:",
+                 ":tick_rate iter/sec ETA: :eta Elapsed: :elapsedfull"),
   clear = FALSE))
 
 # Test uniformity using Monte-Carlo approximated null distributions
@@ -82,7 +83,7 @@ unif_stat(data = samps_sph, type = "all")
 
 ## ----MC-----------------------------------------------------------------------
 # Break the simulation in 10 chunks of tasks to be divided between 2 cores
-sim <- unif_stat_MC(n = 30, type = "all", p = 3, M = 1e4, cores = 2,
+sim <- unif_stat_MC(n = 30, type = "all", p = 3, M = 1e2, cores = 2,
                     chunks = 10)
 
 # Critical values for test statistics
@@ -92,7 +93,7 @@ sim$crit_val_MC
 head(sim$stats_MC)
 
 # Power computation using a pre-built sampler for the alternative
-pow <- unif_stat_MC(n = 30, type = "all", p = 3, M = 1e4, cores = 2,
+pow <- unif_stat_MC(n = 30, type = "all", p = 3, M = 1e2, cores = 2,
                     chunks = 10, r_H1 = r_alt, crit_val = sim$crit_val_MC,
                     alt = "vMF", kappa = 1)
 pow$power_MC
