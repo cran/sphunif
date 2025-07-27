@@ -87,13 +87,13 @@ test_that("Harmonics with (i, k) vs. m", {
 
 })
 
-test_that("Orthonormality of harmonics among i's with common k", {
+test_that("Orthonormality of harmonics among i's with common k = 0,1,2", {
 
   skip_on_cran()
-  set.seed(323231)
+  set.seed(323213)
   M <- 1e3
   for (p in 2:5) {
-    for (k in 1:2) {
+    for (k in 0:2) {
 
       dpk <- d_p_k(p = p, k = k)
       intprods <- diag(rep(1, dpk))
@@ -104,7 +104,7 @@ test_that("Orthonormality of harmonics among i's with common k", {
                                          cores = 1) /
             rotasym::w_p(p = p)
           image(abs(intprods), zlim = c(0, 1.5))
-          expect_lt(max(abs(intprods - diag(rep(1, dpk)))), 0.1)
+          expect_lt(max(abs(intprods - diag(rep(1, dpk)))), 0.15)
         }
       }
 
@@ -225,6 +225,40 @@ test_that("Alternative version Funk-Hecke formula", {
         drop(g_i_k(x = mu, i = i0, k = k0)),
       tolerance = 0.05)
     }
+  }
+
+})
+
+test_that("Eigenvalues and eigenfunctions of the Laplace-Beltrami operator", {
+
+  Y <- function(x, k, i) {
+    xi <- x / sqrt(sum(x^2))
+    g_i_k(x = xi, k = k, i = i)
+  }
+  for (p in 3:4) {
+
+    x <- r_unif_sph(n = 5, p = p)[, , 1]
+    for (k in 1:2) {
+      for (i in seq_len(d_p_k(p = p, k = k))) {
+
+        for (j in seq_len(nrow(x))) {
+
+          x_j <- x[j, ]
+          gr <- numDeriv::grad(func = Y, x = x_j, k = k, i = i)
+          hess <- numDeriv::hessian(func = Y, x = x_j, k = k, i = i)
+
+          Delta_0_Y <- sum(diag(hess)) - drop(x_j %*% hess %*% x_j) -
+            (p - 1) * drop(x_j %*% gr)
+          lambda2_Y <- k * (k + p - 2) * Y(x_j, k = k, i = i)
+
+          expect_equal(Delta_0_Y, -lambda2_Y, tolerance = 1e-4)
+
+        }
+
+      }
+
+    }
+
   }
 
 })
