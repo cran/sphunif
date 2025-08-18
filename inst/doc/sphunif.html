@@ -363,7 +363,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore"><code>sphunif</code>: Uniformity Tests on
 the Circle, Sphere, and Hypersphere</h1>
 <h4 class="author">Eduardo García-Portugués and Thomas Verdebout</h4>
-<h4 class="date">2025-07-27, v1.4.1</h4>
+<h4 class="date">2025-08-18, v1.4.2</h4>
 
 
 <div id="TOC">
@@ -399,33 +399,30 @@ package, <code>unif_test</code>, specifying the <code>type</code> of
 test to be performed. For example, the Watson (omnibus) test:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(sphunif)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;Rcpp&#39; was built under R version 4.2.3</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>) <span class="co"># An htest object</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>) <span class="co"># An htest object</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
 <p>By default, the calibration of the test statistic is done by Monte
 Carlo. This can be changed with <code>p_value = &quot;asymp&quot;</code> to use
 the asymptotic distribution:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>, <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>) <span class="co"># Monte Carlo</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8662</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>, <span class="at">p_value =</span> <span class="st">&quot;asymp&quot;</span>) <span class="co"># Asymp. distr.</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8662</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>, <span class="at">p_value =</span> <span class="st">&quot;asymp&quot;</span>) <span class="co"># Asymp. distr.</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
 <span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
 <p>You can perform <em>several</em> tests within a <em>single</em> call
 to <code>unif_test</code>. Choose the available circular uniformity
 tests from</p>
@@ -751,30 +748,22 @@ using <a href="https://progressr.futureverse.org">progressr</a>.</p>
 <span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a>  <span class="fu">unif_test</span>(<span class="at">data =</span> venus<span class="sc">$</span>X, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PCvM&quot;</span>, <span class="st">&quot;PAD&quot;</span>),</span>
 <span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a>            <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>, <span class="at">chunks =</span> <span class="fl">1e2</span>, <span class="at">M =</span> <span class="fl">5e2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
 <span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a>)</span>
-<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a><span class="co">#&gt; Warning: package ‘Rcpp’ was built under R version 4.2.3</span></span>
-<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
-<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb10-62"><a href="#cb10-62" tabindex="-1"></a><span class="co">#&gt; Warning: package ‘Rcpp’ was built under R version 4.2.3</span></span>
-<span id="cb10-63"><a href="#cb10-63" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb10-64"><a href="#cb10-64" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
-<span id="cb10-65"><a href="#cb10-65" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
-<span id="cb10-66"><a href="#cb10-66" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-67"><a href="#cb10-67" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
-<span id="cb10-68"><a href="#cb10-68" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-69"><a href="#cb10-69" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-70"><a href="#cb10-70" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.116</span></span>
-<span id="cb10-71"><a href="#cb10-71" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
-<span id="cb10-72"><a href="#cb10-72" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-73"><a href="#cb10-73" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-74"><a href="#cb10-74" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
-<span id="cb10-75"><a href="#cb10-75" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-76"><a href="#cb10-76" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
-<span id="cb10-77"><a href="#cb10-77" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-78"><a href="#cb10-78" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-79"><a href="#cb10-79" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.104</span></span>
-<span id="cb10-80"><a href="#cb10-80" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span></code></pre></div>
+<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
+<span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
+<span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-62"><a href="#cb10-62" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.116</span></span>
+<span id="cb10-63"><a href="#cb10-63" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
+<span id="cb10-64"><a href="#cb10-64" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-65"><a href="#cb10-65" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-66"><a href="#cb10-66" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
+<span id="cb10-67"><a href="#cb10-67" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-68"><a href="#cb10-68" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
+<span id="cb10-69"><a href="#cb10-69" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-70"><a href="#cb10-70" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-71"><a href="#cb10-71" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.104</span></span>
+<span id="cb10-72"><a href="#cb10-72" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span></code></pre></div>
 </div>
 <div id="simulation-studies-done-simple" class="section level2">
 <h2>Simulation studies done simple</h2>
@@ -824,109 +813,85 @@ the previous simulation through a convenient parallel wrapper:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Break the simulation in 10 chunks of tasks to be divided between 2 cores</span></span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e2</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>                    <span class="at">chunks =</span> <span class="dv">10</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; Warning: package ‘Rcpp’ was built under R version 4.2.3</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co">#&gt; Warning: package ‘Rcpp’ was built under R version 4.2.3</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co"># Critical values for test statistics</span></span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>sim<span class="sc">$</span>crit_val_MC</span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">#&gt;           Ajne Bakshaev   Bingham    CCF09     CJ12  Gine_Fn   Gine_Gn      PAD</span></span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt; 0.1  0.3985377 1.900965  9.641849 1.607723 25.76571 2.071965 0.7824702 1.370771</span></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt; 0.05 0.4293123 2.119489 10.883988 1.673388 26.04390 2.208151 0.9104627 1.439705</span></span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt; 0.01 0.4862980 2.367336 12.929769 1.768780 27.71544 2.509586 0.9826411 1.663297</span></span>
-<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="co">#&gt;           PCvM   Poisson       PRt      Pycke  Sobolev   Softmax    Stein</span></span>
-<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="co">#&gt; 0.1  0.2376206 0.2275968 0.3364439 0.09537109 10.79428 0.3209408 3.827111</span></span>
-<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a><span class="co">#&gt; 0.05 0.2649362 0.3387827 0.3719113 0.12780765 12.55933 0.3995652 4.655910</span></span>
-<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a><span class="co">#&gt; 0.01 0.2959170 0.4855194 0.4103732 0.21006212 17.63509 0.5294922 4.906770</span></span>
-<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="co">#&gt;        Stereo Rayleigh Rayleigh_HD    Riesz</span></span>
-<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="co">#&gt; 0.1  4.763500 5.348216   0.9586553 1.900965</span></span>
-<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a><span class="co">#&gt; 0.05 6.189260 5.977951   1.2157434 2.119489</span></span>
-<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a><span class="co">#&gt; 0.01 9.170729 6.686576   1.5050384 2.367336</span></span>
-<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a></span>
-<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="co"># Test statistics</span></span>
-<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="fu">head</span>(sim<span class="sc">$</span>stats_MC)</span>
-<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co">#&gt;         Ajne  Bakshaev   Bingham    CCF09     CJ12   Gine_Fn   Gine_Gn</span></span>
-<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#&gt; 1 0.21694040 1.0775492  2.453843 1.259021 25.66338 1.1994472 0.3316856</span></span>
-<span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="co">#&gt; 2 0.12807204 0.7713214  4.378542 1.050875 22.82851 0.9488295 0.4365413</span></span>
-<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a><span class="co">#&gt; 3 0.29297019 1.3318434  1.809964 1.606800 23.17901 1.4254091 0.2535283</span></span>
-<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a><span class="co">#&gt; 4 0.08683535 0.7481899  6.545450 1.100101 16.60092 1.0029567 0.6556153</span></span>
-<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="co">#&gt; 5 0.23053105 1.5359203 12.536621 1.250269 15.47708 1.9035017 0.9813775</span></span>
-<span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a><span class="co">#&gt; 6 0.22807235 1.1421569  3.120667 1.267351 25.84960 1.2559271 0.3436377</span></span>
-<span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a><span class="co">#&gt;         PAD       PCvM     Poisson       PRt       Pycke   Sobolev     Softmax</span></span>
-<span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a><span class="co">#&gt; 1 0.8240941 0.13469365 -0.11669766 0.1761758 -0.05307337  9.007942 -0.15359967</span></span>
-<span id="cb12-39"><a href="#cb12-39" tabindex="-1"></a><span class="co">#&gt; 2 0.6362508 0.09641517 -0.22109092 0.1188851 -0.10675328  7.122146 -0.28051417</span></span>
-<span id="cb12-40"><a href="#cb12-40" tabindex="-1"></a><span class="co">#&gt; 3 0.9845993 0.16648043 -0.02275223 0.2125231 -0.01783641 15.989324 -0.02079736</span></span>
-<span id="cb12-41"><a href="#cb12-41" tabindex="-1"></a><span class="co">#&gt; 4 0.6549005 0.09352374 -0.09784943 0.1193201 -0.07731601  6.343550 -0.29460718</span></span>
-<span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a><span class="co">#&gt; 5 1.2113886 0.19199003  0.30421787 0.2476503  0.14422646  6.006292  0.13450569</span></span>
-<span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a><span class="co">#&gt; 6 0.8495502 0.14276961 -0.16115142 0.1881344 -0.07465451  6.871270 -0.09297427</span></span>
-<span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a><span class="co">#&gt;      Stein    Stereo  Rayleigh Rayleigh_HD     Riesz</span></span>
-<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a><span class="co">#&gt; 1 1.836679 -2.187542 2.3063524 -0.28318046 1.0775492</span></span>
-<span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a><span class="co">#&gt; 2 1.484469 -3.742812 1.0530639 -0.79483333 0.7713214</span></span>
-<span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a><span class="co">#&gt; 3 2.321419 -1.257477 3.2368961  0.09671245 1.3318434</span></span>
-<span id="cb12-48"><a href="#cb12-48" tabindex="-1"></a><span class="co">#&gt; 4 1.587917 -2.709981 0.5177747 -1.01336422 0.7481899</span></span>
-<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a><span class="co">#&gt; 5 3.786246  9.773694 2.5545518 -0.18185347 1.5359203</span></span>
-<span id="cb12-50"><a href="#cb12-50" tabindex="-1"></a><span class="co">#&gt; 6 2.136391 -4.153019 2.6935451 -0.12510970 1.1421569</span></span>
-<span id="cb12-51"><a href="#cb12-51" tabindex="-1"></a></span>
-<span id="cb12-52"><a href="#cb12-52" tabindex="-1"></a><span class="co"># Power computation using a pre-built sampler for the alternative</span></span>
-<span id="cb12-53"><a href="#cb12-53" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e2</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
-<span id="cb12-54"><a href="#cb12-54" tabindex="-1"></a>                    <span class="at">chunks =</span> <span class="dv">10</span>, <span class="at">r_H1 =</span> r_alt, <span class="at">crit_val =</span> sim<span class="sc">$</span>crit_val_MC,</span>
-<span id="cb12-55"><a href="#cb12-55" tabindex="-1"></a>                    <span class="at">alt =</span> <span class="st">&quot;vMF&quot;</span>, <span class="at">kappa =</span> <span class="dv">1</span>)</span>
-<span id="cb12-56"><a href="#cb12-56" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb12-57"><a href="#cb12-57" tabindex="-1"></a><span class="co">#&gt; Warning: package ‘Rcpp’ was built under R version 4.2.3</span></span>
-<span id="cb12-58"><a href="#cb12-58" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb12-59"><a href="#cb12-59" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
-<span id="cb12-60"><a href="#cb12-60" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb12-61"><a href="#cb12-61" tabindex="-1"></a><span class="co">#&gt; Warning: package ‘Rcpp’ was built under R version 4.2.3</span></span>
-<span id="cb12-62"><a href="#cb12-62" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb12-63"><a href="#cb12-63" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
-<span id="cb12-64"><a href="#cb12-64" tabindex="-1"></a>pow<span class="sc">$</span>power_MC</span>
-<span id="cb12-65"><a href="#cb12-65" tabindex="-1"></a><span class="co">#&gt;      Ajne Bakshaev Bingham CCF09 CJ12 Gine_Fn Gine_Gn  PAD PCvM Poisson  PRt</span></span>
-<span id="cb12-66"><a href="#cb12-66" tabindex="-1"></a><span class="co">#&gt; 0.1  0.90     0.91    0.12  0.82 0.11    0.85    0.14 0.89 0.91    0.86 0.89</span></span>
-<span id="cb12-67"><a href="#cb12-67" tabindex="-1"></a><span class="co">#&gt; 0.05 0.84     0.85    0.09  0.78 0.10    0.84    0.08 0.85 0.85    0.77 0.85</span></span>
-<span id="cb12-68"><a href="#cb12-68" tabindex="-1"></a><span class="co">#&gt; 0.01 0.77     0.77    0.03  0.66 0.01    0.78    0.03 0.77 0.77    0.63 0.80</span></span>
-<span id="cb12-69"><a href="#cb12-69" tabindex="-1"></a><span class="co">#&gt;      Pycke Sobolev Softmax Stein Stereo Rayleigh Rayleigh_HD Riesz</span></span>
-<span id="cb12-70"><a href="#cb12-70" tabindex="-1"></a><span class="co">#&gt; 0.1   0.89    0.11    0.87  0.88   0.58     0.90        0.90  0.91</span></span>
-<span id="cb12-71"><a href="#cb12-71" tabindex="-1"></a><span class="co">#&gt; 0.05  0.84    0.08    0.85  0.80   0.48     0.83        0.83  0.85</span></span>
-<span id="cb12-72"><a href="#cb12-72" tabindex="-1"></a><span class="co">#&gt; 0.01  0.67    0.02    0.77  0.76   0.30     0.78        0.78  0.77</span></span>
-<span id="cb12-73"><a href="#cb12-73" tabindex="-1"></a></span>
-<span id="cb12-74"><a href="#cb12-74" tabindex="-1"></a><span class="co"># How to use a custom sampler according to ?unif_stat_MC</span></span>
-<span id="cb12-75"><a href="#cb12-75" tabindex="-1"></a>r_H1 <span class="ot">&lt;-</span> <span class="cf">function</span>(n, p, M, <span class="at">l =</span> <span class="dv">1</span>) {</span>
-<span id="cb12-76"><a href="#cb12-76" tabindex="-1"></a></span>
-<span id="cb12-77"><a href="#cb12-77" tabindex="-1"></a>  samp <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="at">dim =</span> <span class="fu">c</span>(n, p, M))</span>
-<span id="cb12-78"><a href="#cb12-78" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
-<span id="cb12-79"><a href="#cb12-79" tabindex="-1"></a></span>
-<span id="cb12-80"><a href="#cb12-80" tabindex="-1"></a>    samp[, , j] <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="fu">c</span>(l, <span class="fu">rep</span>(<span class="dv">0</span>, p <span class="sc">-</span> <span class="dv">1</span>)),</span>
-<span id="cb12-81"><a href="#cb12-81" tabindex="-1"></a>                                    <span class="at">sigma =</span> <span class="fu">diag</span>(<span class="fu">rep</span>(<span class="dv">1</span>, p)))</span>
-<span id="cb12-82"><a href="#cb12-82" tabindex="-1"></a>    samp[, , j] <span class="ot">&lt;-</span> samp[, , j] <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">rowSums</span>(samp[, , j]<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb12-83"><a href="#cb12-83" tabindex="-1"></a></span>
-<span id="cb12-84"><a href="#cb12-84" tabindex="-1"></a>  }</span>
-<span id="cb12-85"><a href="#cb12-85" tabindex="-1"></a>  <span class="fu">return</span>(samp)</span>
-<span id="cb12-86"><a href="#cb12-86" tabindex="-1"></a></span>
-<span id="cb12-87"><a href="#cb12-87" tabindex="-1"></a>}</span>
-<span id="cb12-88"><a href="#cb12-88" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e2</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
-<span id="cb12-89"><a href="#cb12-89" tabindex="-1"></a>                    <span class="at">chunks =</span> <span class="dv">5</span>, <span class="at">r_H1 =</span> r_H1, <span class="at">crit_val =</span> sim<span class="sc">$</span>crit_val_MC)</span>
-<span id="cb12-90"><a href="#cb12-90" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb12-91"><a href="#cb12-91" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb12-92"><a href="#cb12-92" tabindex="-1"></a><span class="co">#&gt; Warning: package ‘Rcpp’ was built under R version 4.2.3</span></span>
-<span id="cb12-93"><a href="#cb12-93" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
-<span id="cb12-94"><a href="#cb12-94" tabindex="-1"></a><span class="co">#&gt; Loading required package: foreach</span></span>
-<span id="cb12-95"><a href="#cb12-95" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb12-96"><a href="#cb12-96" tabindex="-1"></a><span class="co">#&gt; Warning: package ‘Rcpp’ was built under R version 4.2.3</span></span>
-<span id="cb12-97"><a href="#cb12-97" tabindex="-1"></a><span class="co">#&gt; Loading required package: rngtools</span></span>
-<span id="cb12-98"><a href="#cb12-98" tabindex="-1"></a>pow<span class="sc">$</span>power_MC</span>
-<span id="cb12-99"><a href="#cb12-99" tabindex="-1"></a><span class="co">#&gt;      Ajne Bakshaev Bingham CCF09 CJ12 Gine_Fn Gine_Gn PAD PCvM Poisson PRt</span></span>
-<span id="cb12-100"><a href="#cb12-100" tabindex="-1"></a><span class="co">#&gt; 0.1     1        1    0.36     1 0.09       1    0.37   1    1       1   1</span></span>
-<span id="cb12-101"><a href="#cb12-101" tabindex="-1"></a><span class="co">#&gt; 0.05    1        1    0.29     1 0.08       1    0.24   1    1       1   1</span></span>
-<span id="cb12-102"><a href="#cb12-102" tabindex="-1"></a><span class="co">#&gt; 0.01    1        1    0.15     1 0.01       1    0.21   1    1       1   1</span></span>
-<span id="cb12-103"><a href="#cb12-103" tabindex="-1"></a><span class="co">#&gt;      Pycke Sobolev Softmax Stein Stereo Rayleigh Rayleigh_HD Riesz</span></span>
-<span id="cb12-104"><a href="#cb12-104" tabindex="-1"></a><span class="co">#&gt; 0.1      1    0.21       1     1   0.97        1           1     1</span></span>
-<span id="cb12-105"><a href="#cb12-105" tabindex="-1"></a><span class="co">#&gt; 0.05     1    0.13       1     1   0.94        1           1     1</span></span>
-<span id="cb12-106"><a href="#cb12-106" tabindex="-1"></a><span class="co">#&gt; 0.01     1    0.03       1     1   0.82        1           1     1</span></span></code></pre></div>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># Critical values for test statistics</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>sim<span class="sc">$</span>crit_val_MC</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt;           Ajne Bakshaev   Bingham    CCF09     CJ12  Gine_Fn   Gine_Gn      PAD</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; 0.1  0.3985377 1.900965  9.641849 1.607723 25.76571 2.071965 0.7824702 1.370771</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co">#&gt; 0.05 0.4293123 2.119489 10.883988 1.673388 26.04390 2.208151 0.9104627 1.439705</span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">#&gt; 0.01 0.4862980 2.367336 12.929769 1.768780 27.71544 2.509586 0.9826411 1.663297</span></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co">#&gt;           PCvM   Poisson       PRt      Pycke  Sobolev   Softmax    Stein</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="co">#&gt; 0.1  0.2376206 0.2275968 0.3364439 0.09537109 10.79428 0.3209408 3.827111</span></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co">#&gt; 0.05 0.2649362 0.3387827 0.3719113 0.12780765 12.55933 0.3995652 4.655910</span></span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co">#&gt; 0.01 0.2959170 0.4855194 0.4103732 0.21006212 17.63509 0.5294922 4.906770</span></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">#&gt;        Stereo Rayleigh Rayleigh_HD    Riesz</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt; 0.1  4.763500 5.348216   0.9586553 1.900965</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt; 0.05 6.189260 5.977951   1.2157434 2.119489</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt; 0.01 9.170729 6.686576   1.5050384 2.367336</span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="co"># Test statistics</span></span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a><span class="fu">head</span>(sim<span class="sc">$</span>stats_MC)</span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a><span class="co">#&gt;         Ajne  Bakshaev   Bingham    CCF09     CJ12   Gine_Fn   Gine_Gn</span></span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="co">#&gt; 1 0.21694040 1.0775492  2.453843 1.259021 25.66338 1.1994472 0.3316856</span></span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="co">#&gt; 2 0.12807204 0.7713214  4.378542 1.050875 22.82851 0.9488295 0.4365413</span></span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a><span class="co">#&gt; 3 0.29297019 1.3318434  1.809964 1.606800 23.17901 1.4254091 0.2535283</span></span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a><span class="co">#&gt; 4 0.08683535 0.7481899  6.545450 1.100101 16.60092 1.0029567 0.6556153</span></span>
+<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a><span class="co">#&gt; 5 0.23053105 1.5359203 12.536621 1.250269 15.47708 1.9035017 0.9813775</span></span>
+<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="co">#&gt; 6 0.22807235 1.1421569  3.120667 1.267351 25.84960 1.2559271 0.3436377</span></span>
+<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="co">#&gt;         PAD       PCvM     Poisson       PRt       Pycke   Sobolev     Softmax</span></span>
+<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co">#&gt; 1 0.8240941 0.13469365 -0.11669766 0.1761758 -0.05307337  9.007942 -0.15359967</span></span>
+<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#&gt; 2 0.6362508 0.09641517 -0.22109092 0.1188851 -0.10675328  7.122146 -0.28051417</span></span>
+<span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="co">#&gt; 3 0.9845993 0.16648043 -0.02275223 0.2125231 -0.01783641 15.989324 -0.02079736</span></span>
+<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a><span class="co">#&gt; 4 0.6549005 0.09352374 -0.09784943 0.1193201 -0.07731601  6.343550 -0.29460718</span></span>
+<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a><span class="co">#&gt; 5 1.2113886 0.19199003  0.30421787 0.2476503  0.14422646  6.006292  0.13450569</span></span>
+<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="co">#&gt; 6 0.8495502 0.14276961 -0.16115142 0.1881344 -0.07465451  6.871270 -0.09297427</span></span>
+<span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a><span class="co">#&gt;      Stein    Stereo  Rayleigh Rayleigh_HD     Riesz</span></span>
+<span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a><span class="co">#&gt; 1 1.836679 -2.187542 2.3063524 -0.28318046 1.0775492</span></span>
+<span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a><span class="co">#&gt; 2 1.484469 -3.742812 1.0530639 -0.79483333 0.7713214</span></span>
+<span id="cb12-39"><a href="#cb12-39" tabindex="-1"></a><span class="co">#&gt; 3 2.321419 -1.257477 3.2368961  0.09671245 1.3318434</span></span>
+<span id="cb12-40"><a href="#cb12-40" tabindex="-1"></a><span class="co">#&gt; 4 1.587917 -2.709981 0.5177747 -1.01336422 0.7481899</span></span>
+<span id="cb12-41"><a href="#cb12-41" tabindex="-1"></a><span class="co">#&gt; 5 3.786246  9.773694 2.5545518 -0.18185347 1.5359203</span></span>
+<span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a><span class="co">#&gt; 6 2.136391 -4.153019 2.6935451 -0.12510970 1.1421569</span></span>
+<span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a><span class="co"># Power computation using a pre-built sampler for the alternative</span></span>
+<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e2</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
+<span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a>                    <span class="at">chunks =</span> <span class="dv">10</span>, <span class="at">r_H1 =</span> r_alt, <span class="at">crit_val =</span> sim<span class="sc">$</span>crit_val_MC,</span>
+<span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a>                    <span class="at">alt =</span> <span class="st">&quot;vMF&quot;</span>, <span class="at">kappa =</span> <span class="dv">1</span>)</span>
+<span id="cb12-48"><a href="#cb12-48" tabindex="-1"></a>pow<span class="sc">$</span>power_MC</span>
+<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a><span class="co">#&gt;      Ajne Bakshaev Bingham CCF09 CJ12 Gine_Fn Gine_Gn  PAD PCvM Poisson  PRt</span></span>
+<span id="cb12-50"><a href="#cb12-50" tabindex="-1"></a><span class="co">#&gt; 0.1  0.90     0.91    0.12  0.82 0.11    0.85    0.14 0.89 0.91    0.86 0.89</span></span>
+<span id="cb12-51"><a href="#cb12-51" tabindex="-1"></a><span class="co">#&gt; 0.05 0.84     0.85    0.09  0.78 0.10    0.84    0.08 0.85 0.85    0.77 0.85</span></span>
+<span id="cb12-52"><a href="#cb12-52" tabindex="-1"></a><span class="co">#&gt; 0.01 0.77     0.77    0.03  0.66 0.01    0.78    0.03 0.77 0.77    0.63 0.80</span></span>
+<span id="cb12-53"><a href="#cb12-53" tabindex="-1"></a><span class="co">#&gt;      Pycke Sobolev Softmax Stein Stereo Rayleigh Rayleigh_HD Riesz</span></span>
+<span id="cb12-54"><a href="#cb12-54" tabindex="-1"></a><span class="co">#&gt; 0.1   0.89    0.11    0.87  0.88   0.58     0.90        0.90  0.91</span></span>
+<span id="cb12-55"><a href="#cb12-55" tabindex="-1"></a><span class="co">#&gt; 0.05  0.84    0.08    0.85  0.80   0.48     0.83        0.83  0.85</span></span>
+<span id="cb12-56"><a href="#cb12-56" tabindex="-1"></a><span class="co">#&gt; 0.01  0.67    0.02    0.77  0.76   0.30     0.78        0.78  0.77</span></span>
+<span id="cb12-57"><a href="#cb12-57" tabindex="-1"></a></span>
+<span id="cb12-58"><a href="#cb12-58" tabindex="-1"></a><span class="co"># How to use a custom sampler according to ?unif_stat_MC</span></span>
+<span id="cb12-59"><a href="#cb12-59" tabindex="-1"></a>r_H1 <span class="ot">&lt;-</span> <span class="cf">function</span>(n, p, M, <span class="at">l =</span> <span class="dv">1</span>) {</span>
+<span id="cb12-60"><a href="#cb12-60" tabindex="-1"></a></span>
+<span id="cb12-61"><a href="#cb12-61" tabindex="-1"></a>  samp <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="at">dim =</span> <span class="fu">c</span>(n, p, M))</span>
+<span id="cb12-62"><a href="#cb12-62" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb12-63"><a href="#cb12-63" tabindex="-1"></a></span>
+<span id="cb12-64"><a href="#cb12-64" tabindex="-1"></a>    samp[, , j] <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="fu">c</span>(l, <span class="fu">rep</span>(<span class="dv">0</span>, p <span class="sc">-</span> <span class="dv">1</span>)),</span>
+<span id="cb12-65"><a href="#cb12-65" tabindex="-1"></a>                                    <span class="at">sigma =</span> <span class="fu">diag</span>(<span class="fu">rep</span>(<span class="dv">1</span>, p)))</span>
+<span id="cb12-66"><a href="#cb12-66" tabindex="-1"></a>    samp[, , j] <span class="ot">&lt;-</span> samp[, , j] <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">rowSums</span>(samp[, , j]<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb12-67"><a href="#cb12-67" tabindex="-1"></a></span>
+<span id="cb12-68"><a href="#cb12-68" tabindex="-1"></a>  }</span>
+<span id="cb12-69"><a href="#cb12-69" tabindex="-1"></a>  <span class="fu">return</span>(samp)</span>
+<span id="cb12-70"><a href="#cb12-70" tabindex="-1"></a></span>
+<span id="cb12-71"><a href="#cb12-71" tabindex="-1"></a>}</span>
+<span id="cb12-72"><a href="#cb12-72" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e2</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
+<span id="cb12-73"><a href="#cb12-73" tabindex="-1"></a>                    <span class="at">chunks =</span> <span class="dv">5</span>, <span class="at">r_H1 =</span> r_H1, <span class="at">crit_val =</span> sim<span class="sc">$</span>crit_val_MC)</span>
+<span id="cb12-74"><a href="#cb12-74" tabindex="-1"></a>pow<span class="sc">$</span>power_MC</span>
+<span id="cb12-75"><a href="#cb12-75" tabindex="-1"></a><span class="co">#&gt;      Ajne Bakshaev Bingham CCF09 CJ12 Gine_Fn Gine_Gn PAD PCvM Poisson PRt</span></span>
+<span id="cb12-76"><a href="#cb12-76" tabindex="-1"></a><span class="co">#&gt; 0.1     1        1    0.36     1 0.09       1    0.37   1    1       1   1</span></span>
+<span id="cb12-77"><a href="#cb12-77" tabindex="-1"></a><span class="co">#&gt; 0.05    1        1    0.29     1 0.08       1    0.24   1    1       1   1</span></span>
+<span id="cb12-78"><a href="#cb12-78" tabindex="-1"></a><span class="co">#&gt; 0.01    1        1    0.15     1 0.01       1    0.21   1    1       1   1</span></span>
+<span id="cb12-79"><a href="#cb12-79" tabindex="-1"></a><span class="co">#&gt;      Pycke Sobolev Softmax Stein Stereo Rayleigh Rayleigh_HD Riesz</span></span>
+<span id="cb12-80"><a href="#cb12-80" tabindex="-1"></a><span class="co">#&gt; 0.1      1    0.21       1     1   0.97        1           1     1</span></span>
+<span id="cb12-81"><a href="#cb12-81" tabindex="-1"></a><span class="co">#&gt; 0.05     1    0.13       1     1   0.94        1           1     1</span></span>
+<span id="cb12-82"><a href="#cb12-82" tabindex="-1"></a><span class="co">#&gt; 0.01     1    0.03       1     1   0.82        1           1     1</span></span></code></pre></div>
 <p><code>unif_stat_MC</code> can be used for constructing the Monte
 Carlo calibration necessary for <code>unif_test</code>, either for
 providing a rejection rule based on <code>$crit_val_MC</code> or for

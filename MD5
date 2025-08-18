@@ -1,6 +1,6 @@
-19569611301db13d2fda38945415a950 *DESCRIPTION
+663364a1e219c51acd2fa287aab3a417 *DESCRIPTION
 e19586c374578e0237f5b53fd07c5bc6 *NAMESPACE
-cfe383eb18341d8628d4004468db7679 *NEWS.md
+a1fec7a71189875b504f24101a40fd3a *NEWS.md
 c40da82934716e8b49477eab02d824dd *R/Gegenbauer.R
 6eca47504aae789d89d81bb5a65c6e00 *R/Pn.R
 10ba5bb13ca635146214d8b5182d3186 *R/RcppExports.R
@@ -15,7 +15,7 @@ e4a45658c2afa84c447dd7adb5b892d6 *R/harmonics.R
 46e0d796913b5164b290d00fdbcfb508 *R/r_alt.R
 fc15ae94114f0d081b0680cc9e0b469f *R/sph_distr.R
 a617b6437860f785579050bcdf7a6b09 *R/sph_stat.R
-7e93f799004d6f95086a81b223423d23 *R/sphunif-package.R
+5208c0a660862100771fa54a93fccee4 *R/sphunif-package.R
 ea52127d0cade25d190e3f45644f7192 *R/unif_stat.R
 6ce1cbac72cce5022ef6352353830689 *R/unif_stat_MC.R
 a68e8e189792948b91144acd4d1b0ab0 *R/unif_stat_distr.R
@@ -29,10 +29,10 @@ beafaece322d0e6f0a4ecedcbcd02ad9 *build/vignette.rds
 6785c46339609446a1f6b71e8d5aba5a *data/rhea.rda
 cdcd85a6f4deaa4a3227b3b75707c27b *data/venus.rda
 d75d5d44ac8806d91776f349d9fe5efb *inst/CITATION
-7dc643fff4013aede16db010facd8b0f *inst/WORDLIST
+704a2e49b7b06441c3c3379f833d0e97 *inst/WORDLIST
 d9a939b5a80088695336012dfc566bd7 *inst/doc/sphunif.R
 6447c36f5a6903bdb5234e863f1618c3 *inst/doc/sphunif.Rmd
-1ac0c2106ab37089052ddc48ddc0e9ac *inst/doc/sphunif.html
+6fae233bed8c3ba39023714f5d1f982d *inst/doc/sphunif.html
 1368e7d3e0c3a98ce7ad02f4e3e34e5d *man/A_theta_x.Rd
 17da1eb468263fa3bf7eb99545ab57fa *man/F_from_f.Rd
 188e213e88e3e25d069da07bf0893e22 *man/Gauss_Legen.Rd
@@ -65,7 +65,7 @@ c1afef9d98e562a9baf125f041a0435c *man/rot_ab.Rd
 c28ca68906fae23b5e3d7c6fa585666e *man/sph_stat.Rd
 64946d2528bc4a3de59808c1b49843a2 *man/sph_stat_Sobolev.Rd
 4f5d27fa7c69ccde01c2ccbba3f494de *man/sph_stat_distr.Rd
-6f40f0621929061729ab421260a11ed6 *man/sphunif-package.Rd
+d5133bad95192061b8950276b0d0fbdf *man/sphunif-package.Rd
 e1a9fca7fc0883093bbf400d3fde5b5a *man/unif_cap.Rd
 3a3d73070fde9d2daf085916c84756a9 *man/unif_stat.Rd
 76650acce229813a863b80c172fa2b9b *man/unif_stat_MC.Rd
@@ -112,4 +112,4 @@ d41d8cd98f00b204e9800998ecf8427e *tests/testthat/test_sph_distr.R
 4403596ed5a579527beaae458f1310ce *tests/testthat/test_wshisq.R
 5719b96117ea850dcc0199175803d7fd *vignettes/apalike-custom.bst
 6447c36f5a6903bdb5234e863f1618c3 *vignettes/sphunif.Rmd
-a83efc8edd43d39c7020827f51cae53d *vignettes/sphunif.bib
+a9af506aa8930018d36b11921a5db5cd *vignettes/sphunif.bib
