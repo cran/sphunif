@@ -2,6 +2,7 @@
 options(rmarkdown.html_vignette.check_title = FALSE)
 knitr::opts_chunk$set(
   collapse = TRUE,
+  message = FALSE,
   comment = "#>"
 )
 
@@ -131,4 +132,7 @@ ht2$reject
 
 # Faster than
 unif_test(data = samps_sph[, , 1], type = "Rayleigh", p_value = "MC")
+
+## -----------------------------------------------------------------------------
+citation("sphunif")
 

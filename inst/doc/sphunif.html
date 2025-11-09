@@ -49,8 +49,9 @@ overflow: visible;
 }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -61,7 +62,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -363,7 +364,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore"><code>sphunif</code>: Uniformity Tests on
 the Circle, Sphere, and Hypersphere</h1>
 <h4 class="author">Eduardo García-Portugués and Thomas Verdebout</h4>
-<h4 class="date">2025-08-18, v1.4.2</h4>
+<h4 class="date">2025-11-09, v1.4.3</h4>
 
 
 <div id="TOC">
@@ -381,6 +382,7 @@ dimensions</a></li>
 data example: are Venusian craters uniformly distributed?</a></li>
 <li><a href="#simulation-studies-done-simple" id="toc-simulation-studies-done-simple">Simulation studies done
 simple</a></li>
+<li><a href="#citation" id="toc-citation">Citation</a></li>
 <li><a href="#references" id="toc-references">References</a></li>
 </ul>
 </div>
@@ -395,17 +397,16 @@ sample in <strong>radians</strong>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">987202226</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>cir_data <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">2</span> <span class="sc">*</span> pi)</span></code></pre></div>
 <p>Then you can call the main function in the <code>sphunif</code>
-package, <code>unif_test</code>, specifying the <code>type</code> of
+package, <code>unif_test()</code>, specifying the <code>type</code> of
 test to be performed. For example, the Watson (omnibus) test:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(sphunif)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; Loading required package: Rcpp</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>) <span class="co"># An htest object</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="st">&quot;Watson&quot;</span>) <span class="co"># An htest object</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
 <p>By default, the calibration of the test statistic is done by Monte
 Carlo. This can be changed with <code>p_value = &quot;asymp&quot;</code> to use
 the asymptotic distribution:</p>
@@ -424,7 +425,7 @@ the asymptotic distribution:</p>
 <span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
 <span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
 <p>You can perform <em>several</em> tests within a <em>single</em> call
-to <code>unif_test</code>. Choose the available circular uniformity
+to <code>unif_test()</code>. Choose the available circular uniformity
 tests from</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>avail_cir_tests</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;Ajne&quot;           &quot;Bakshaev&quot;       &quot;Bingham&quot;        &quot;Cressie&quot;       </span></span>
@@ -436,27 +437,27 @@ tests from</p>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; [25] &quot;Rao&quot;            &quot;Rayleigh&quot;       &quot;Riesz&quot;          &quot;Rothman&quot;       </span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; [29] &quot;Sobolev&quot;        &quot;Softmax&quot;        &quot;Stein&quot;          &quot;Vacancy&quot;       </span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; [33] &quot;Watson&quot;         &quot;Watson_1976&quot;</span></span></code></pre></div>
-<p>For example, you can use the Projected Anderson–Darling (<span class="citation">García-Portugués, Navarro-Esteban, and Cuesta-Albertos
-(2023)</span>, also an omnibus test) test and the Watson test:</p>
+<p>For example, you can use the more powerful Projected Anderson–Darling
+test (<span class="citation">García-Portugués, Navarro-Esteban, and
+Cuesta-Albertos (2023)</span>, also omnibus) and the Watson test:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># A *list* of htest objects</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PAD&quot;</span>, <span class="st">&quot;Watson&quot;</span>))</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; Series truncated from 10000 to 10000 terms (difference &lt;= 0 with the HBE tail probability; last weight = 1.137e-08).</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of circular uniformity</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; statistic = 0.54217, p-value = 0.8403</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of circular uniformity</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; statistic = 0.54217, p-value = 0.8403</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; $Watson</span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; $Watson</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt;  Watson test of circular uniformity</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; data:  cir_data</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; statistic = 0.03701, p-value = 0.8584</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to circular uniformity</span></span></code></pre></div>
 <p><span class="citation">García-Portugués and Verdebout (2018)</span>
 gives a review of different tests of uniformity on the circle. Section
 5.1 in <span class="citation">Pewsey and García-Portugués (2021)</span>
@@ -713,61 +714,57 @@ using <a href="https://progressr.futureverse.org">progressr</a>.</p>
 <span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="co"># Test uniformity using the Projected Cramér-von Mises and Projected</span></span>
 <span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="co"># Anderson-Darling tests on S^2, both using asymptotic distributions</span></span>
 <span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> venus<span class="sc">$</span>X, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PCvM&quot;</span>, <span class="st">&quot;PAD&quot;</span>), <span class="at">p_value =</span> <span class="st">&quot;asymp&quot;</span>)</span>
-<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="co">#&gt; Series truncated from 10000 to 10000 terms (difference &lt;= 0 with the HBE tail probability; last weight = 6.249e-14).</span></span>
-<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a><span class="co">#&gt; Series truncated from 10000 to 10000 terms (difference &lt;= 0 with the HBE tail probability; last weight = 4.999e-13).</span></span>
-<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
 <span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
-<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.1272</span></span>
-<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
-<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.1272</span></span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
 <span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
 <span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
-<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.1149</span></span>
-<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
-<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a></span>
-<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a><span class="co"># Define a handler for progressr</span></span>
-<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a><span class="fu">require</span>(progress)</span>
-<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a><span class="co">#&gt; Loading required package: progress</span></span>
-<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;progress&#39; was built under R version 4.2.3</span></span>
-<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a><span class="fu">require</span>(progressr)</span>
-<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a><span class="co">#&gt; Loading required package: progressr</span></span>
-<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a><span class="fu">handlers</span>(<span class="fu">handler_progress</span>(</span>
-<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">paste</span>(<span class="st">&quot;(:spin) [:bar] :percent Iter: :current/:total Rate:&quot;</span>,</span>
-<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a>                 <span class="st">&quot;:tick_rate iter/sec ETA: :eta Elapsed: :elapsedfull&quot;</span>),</span>
-<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a>  <span class="at">clear =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a></span>
-<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a><span class="co"># Test uniformity using Monte-Carlo approximated null distributions</span></span>
-<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a><span class="fu">with_progress</span>(</span>
-<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a>  <span class="fu">unif_test</span>(<span class="at">data =</span> venus<span class="sc">$</span>X, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PCvM&quot;</span>, <span class="st">&quot;PAD&quot;</span>),</span>
-<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a>            <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>, <span class="at">chunks =</span> <span class="fl">1e2</span>, <span class="at">M =</span> <span class="fl">5e2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
-<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a>)</span>
-<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
-<span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.1149</span></span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a><span class="co"># Define a handler for progressr</span></span>
+<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a><span class="fu">require</span>(progress)</span>
+<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;progress&#39; was built under R version 4.2.3</span></span>
+<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a><span class="fu">require</span>(progressr)</span>
+<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a><span class="fu">handlers</span>(<span class="fu">handler_progress</span>(</span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">paste</span>(<span class="st">&quot;(:spin) [:bar] :percent Iter: :current/:total Rate:&quot;</span>,</span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a>                 <span class="st">&quot;:tick_rate iter/sec ETA: :eta Elapsed: :elapsedfull&quot;</span>),</span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a>  <span class="at">clear =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a></span>
+<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a><span class="co"># Test uniformity using Monte-Carlo approximated null distributions</span></span>
+<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a><span class="fu">with_progress</span>(</span>
+<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a>  <span class="fu">unif_test</span>(<span class="at">data =</span> venus<span class="sc">$</span>X, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PCvM&quot;</span>, <span class="st">&quot;PAD&quot;</span>),</span>
+<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a>            <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>, <span class="at">chunks =</span> <span class="fl">1e2</span>, <span class="at">M =</span> <span class="fl">5e2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a>)</span>
+<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
+<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
+<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.116</span></span>
+<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
 <span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-62"><a href="#cb10-62" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.116</span></span>
-<span id="cb10-63"><a href="#cb10-63" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
-<span id="cb10-64"><a href="#cb10-64" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-62"><a href="#cb10-62" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
+<span id="cb10-63"><a href="#cb10-63" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-64"><a href="#cb10-64" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
 <span id="cb10-65"><a href="#cb10-65" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-66"><a href="#cb10-66" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
-<span id="cb10-67"><a href="#cb10-67" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-68"><a href="#cb10-68" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
-<span id="cb10-69"><a href="#cb10-69" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-70"><a href="#cb10-70" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-71"><a href="#cb10-71" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.104</span></span>
-<span id="cb10-72"><a href="#cb10-72" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span></code></pre></div>
+<span id="cb10-66"><a href="#cb10-66" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-67"><a href="#cb10-67" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.104</span></span>
+<span id="cb10-68"><a href="#cb10-68" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span></code></pre></div>
 </div>
 <div id="simulation-studies-done-simple" class="section level2">
 <h2>Simulation studies done simple</h2>
-<p><code>unif_stat</code> allows to compute several statistics to
+<p><code>unif_stat()</code> allows computing several statistics to
 different samples within a single call, thus facilitating Monte Carlo
 experiments:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># M samples of size n on S^2</span></span>
@@ -808,8 +805,9 @@ experiments:</p>
 <span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a><span class="co">#&gt; 8  -0.31301945 1.010286 -1.07841571 1.4134453 -0.647708254 0.8598836</span></span>
 <span id="cb11-37"><a href="#cb11-37" tabindex="-1"></a><span class="co">#&gt; 9  -0.01942868 2.465292 -0.85602632 3.0045142  0.001842922 1.3273645</span></span>
 <span id="cb11-38"><a href="#cb11-38" tabindex="-1"></a><span class="co">#&gt; 10 -0.08055493 2.423237  1.98899355 2.2218008 -0.317698486 1.2037837</span></span></code></pre></div>
-<p>Additionally, <code>unif_stat_MC</code> is an utility for performing
-the previous simulation through a convenient parallel wrapper:</p>
+<p>Additionally, <code>unif_stat_MC()</code> is an utility for
+performing the previous simulation through a convenient parallel
+wrapper:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Break the simulation in 10 chunks of tasks to be divided between 2 cores</span></span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">unif_stat_MC</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>, <span class="at">p =</span> <span class="dv">3</span>, <span class="at">M =</span> <span class="fl">1e2</span>, <span class="at">cores =</span> <span class="dv">2</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>                    <span class="at">chunks =</span> <span class="dv">10</span>)</span>
@@ -892,8 +890,8 @@ the previous simulation through a convenient parallel wrapper:</p>
 <span id="cb12-80"><a href="#cb12-80" tabindex="-1"></a><span class="co">#&gt; 0.1      1    0.21       1     1   0.97        1           1     1</span></span>
 <span id="cb12-81"><a href="#cb12-81" tabindex="-1"></a><span class="co">#&gt; 0.05     1    0.13       1     1   0.94        1           1     1</span></span>
 <span id="cb12-82"><a href="#cb12-82" tabindex="-1"></a><span class="co">#&gt; 0.01     1    0.03       1     1   0.82        1           1     1</span></span></code></pre></div>
-<p><code>unif_stat_MC</code> can be used for constructing the Monte
-Carlo calibration necessary for <code>unif_test</code>, either for
+<p><code>unif_stat_MC()</code> can be used for constructing the Monte
+Carlo calibration necessary for <code>unif_test()</code>, either for
 providing a rejection rule based on <code>$crit_val_MC</code> or for
 approximating the <span class="math inline">\(p\)</span>-value by
 <code>$stats_MC</code>.</p>
@@ -933,6 +931,25 @@ approximating the <span class="math inline">\(p\)</span>-value by
 <span id="cb13-34"><a href="#cb13-34" tabindex="-1"></a><span class="co">#&gt; data:  samps_sph[, , 1]</span></span>
 <span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a><span class="co">#&gt; statistic = 3.1199, p-value = 0.3739</span></span>
 <span id="cb13-36"><a href="#cb13-36" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: mean direction different from zero</span></span></code></pre></div>
+</div>
+<div id="citation" class="section level2">
+<h2>Citation</h2>
+<p>If you use <code>sphunif</code>, please cite it!</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;sphunif&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt; To cite sphunif in publications use:</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt;   García-Portugués, E. and Verdebout, T. (2025). sphunif: Uniformity</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt;   Tests on the Circle, Sphere, and Hypersphere. R package version</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt;   1.4.3. https://CRAN.R-project.org/package=sphunif</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt;   García-Portugués, E. and Verdebout, T. (2018). An overview of</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt;   uniformity tests on the hypersphere. arXiv:1804.00286.</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt;   https://arxiv.org/abs/1804.00286</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#&gt; To see these entries in BibTeX format, use &#39;print(&lt;citation&gt;,</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">#&gt; bibtex=TRUE)&#39;, &#39;toBibtex(.)&#39;, or set</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co">#&gt; &#39;options(citation.bibtex.max=999)&#39;.</span></span></code></pre></div>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="unnumbered">References</h2>
