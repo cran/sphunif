@@ -150,7 +150,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 div.csl-bib-body { }
 div.csl-entry {
 clear: both;
-margin-bottom: 0em;
 }
 .hanging div.csl-entry {
 margin-left:2em;
@@ -364,7 +363,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore"><code>sphunif</code>: Uniformity Tests on
 the Circle, Sphere, and Hypersphere</h1>
 <h4 class="author">Eduardo García-Portugués and Thomas Verdebout</h4>
-<h4 class="date">2025-11-09, v1.4.3</h4>
+<h4 class="date">2026-06-02, v1.4.4</h4>
 
 
 <div id="TOC">
@@ -438,8 +437,8 @@ tests from</p>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; [29] &quot;Sobolev&quot;        &quot;Softmax&quot;        &quot;Stein&quot;          &quot;Vacancy&quot;       </span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; [33] &quot;Watson&quot;         &quot;Watson_1976&quot;</span></span></code></pre></div>
 <p>For example, you can use the more powerful Projected Anderson–Darling
-test (<span class="citation">García-Portugués, Navarro-Esteban, and
-Cuesta-Albertos (2023)</span>, also omnibus) and the Watson test:</p>
+test (<span class="citation">García-Portugués et al. (2023)</span>, also
+omnibus) and the Watson test:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># A *list* of htest objects</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">unif_test</span>(<span class="at">data =</span> cir_data, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PAD&quot;</span>, <span class="st">&quot;Watson&quot;</span>))</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
@@ -688,11 +687,10 @@ with a sample of size <code>100</code> on the <span class="math inline">\(9\)</s
 <div id="a-data-example-are-venusian-craters-uniformly-distributed" class="section level2">
 <h2>A data example: are Venusian craters uniformly distributed?</h2>
 <p>The following snippet partially reproduces the data application in
-<span class="citation">García-Portugués, Navarro-Esteban, and
-Cuesta-Albertos (2021)</span> on testing the uniformity of known
-Venusian craters. Incidentally, it also illustrates how to monitor the
-progress of a Monte Carlo simulation when <code>p_value = &quot;MC&quot;</code>
-using <a href="https://progressr.futureverse.org">progressr</a>.</p>
+<span class="citation">García-Portugués et al. (2021)</span> on testing
+the uniformity of known Venusian craters. Incidentally, it also
+illustrates how to monitor the progress of a Monte Carlo simulation when
+<code>p_value = &quot;MC&quot;</code> using <a href="https://progressr.futureverse.org">progressr</a>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Load spherical data</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">data</span>(venus)</span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="fu">head</span>(venus)</span>
@@ -733,34 +731,33 @@ using <a href="https://progressr.futureverse.org">progressr</a>.</p>
 <span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a></span>
 <span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a><span class="co"># Define a handler for progressr</span></span>
 <span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a><span class="fu">require</span>(progress)</span>
-<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;progress&#39; was built under R version 4.2.3</span></span>
-<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a><span class="fu">require</span>(progressr)</span>
-<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a><span class="fu">handlers</span>(<span class="fu">handler_progress</span>(</span>
-<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">paste</span>(<span class="st">&quot;(:spin) [:bar] :percent Iter: :current/:total Rate:&quot;</span>,</span>
-<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a>                 <span class="st">&quot;:tick_rate iter/sec ETA: :eta Elapsed: :elapsedfull&quot;</span>),</span>
-<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a>  <span class="at">clear =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a></span>
-<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a><span class="co"># Test uniformity using Monte-Carlo approximated null distributions</span></span>
-<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a><span class="fu">with_progress</span>(</span>
-<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a>  <span class="fu">unif_test</span>(<span class="at">data =</span> venus<span class="sc">$</span>X, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PCvM&quot;</span>, <span class="st">&quot;PAD&quot;</span>),</span>
-<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a>            <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>, <span class="at">chunks =</span> <span class="fl">1e2</span>, <span class="at">M =</span> <span class="fl">5e2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
-<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a>)</span>
-<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
-<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
-<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.116</span></span>
-<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
+<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a><span class="fu">require</span>(progressr)</span>
+<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a><span class="fu">handlers</span>(<span class="fu">handler_progress</span>(</span>
+<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a>  <span class="at">format =</span> <span class="fu">paste</span>(<span class="st">&quot;(:spin) [:bar] :percent Iter: :current/:total Rate:&quot;</span>,</span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a>                 <span class="st">&quot;:tick_rate iter/sec ETA: :eta Elapsed: :elapsedfull&quot;</span>),</span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a>  <span class="at">clear =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a><span class="co"># Test uniformity using Monte-Carlo approximated null distributions</span></span>
+<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a><span class="fu">with_progress</span>(</span>
+<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a>  <span class="fu">unif_test</span>(<span class="at">data =</span> venus<span class="sc">$</span>X, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;PCvM&quot;</span>, <span class="st">&quot;PAD&quot;</span>),</span>
+<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a>            <span class="at">p_value =</span> <span class="st">&quot;MC&quot;</span>, <span class="at">chunks =</span> <span class="fl">1e2</span>, <span class="at">M =</span> <span class="fl">5e2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a>)</span>
+<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a><span class="co">#&gt; $PCvM</span></span>
+<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a><span class="co">#&gt;  Projected Cramer-von Mises test of spherical uniformity</span></span>
+<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a><span class="co">#&gt; statistic = 0.25844, p-value = 0.116</span></span>
+<span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span>
+<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-62"><a href="#cb10-62" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
-<span id="cb10-63"><a href="#cb10-63" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-64"><a href="#cb10-64" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
-<span id="cb10-65"><a href="#cb10-65" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-66"><a href="#cb10-66" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
-<span id="cb10-67"><a href="#cb10-67" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.104</span></span>
-<span id="cb10-68"><a href="#cb10-68" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span></code></pre></div>
+<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a><span class="co">#&gt; $PAD</span></span>
+<span id="cb10-62"><a href="#cb10-62" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-63"><a href="#cb10-63" tabindex="-1"></a><span class="co">#&gt;  Projected Anderson-Darling test of spherical uniformity</span></span>
+<span id="cb10-64"><a href="#cb10-64" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-65"><a href="#cb10-65" tabindex="-1"></a><span class="co">#&gt; data:  venus$X</span></span>
+<span id="cb10-66"><a href="#cb10-66" tabindex="-1"></a><span class="co">#&gt; statistic = 1.5077, p-value = 0.104</span></span>
+<span id="cb10-67"><a href="#cb10-67" tabindex="-1"></a><span class="co">#&gt; alternative hypothesis: any alternative to spherical uniformity</span></span></code></pre></div>
 </div>
 <div id="simulation-studies-done-simple" class="section level2">
 <h2>Simulation studies done simple</h2>
@@ -936,34 +933,34 @@ approximating the <span class="math inline">\(p\)</span>-value by
 <h2>Citation</h2>
 <p>If you use <code>sphunif</code>, please cite it!</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;sphunif&quot;</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt; To cite sphunif in publications use:</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt;   García-Portugués, E. and Verdebout, T. (2025). sphunif: Uniformity</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt;   Tests on the Circle, Sphere, and Hypersphere. R package version</span></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt;   1.4.3. https://CRAN.R-project.org/package=sphunif</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt;   García-Portugués, E. and Verdebout, T. (2018). An overview of</span></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt;   uniformity tests on the hypersphere. arXiv:1804.00286.</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt;   https://arxiv.org/abs/1804.00286</span></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#&gt; To see these entries in BibTeX format, use &#39;print(&lt;citation&gt;,</span></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">#&gt; bibtex=TRUE)&#39;, &#39;toBibtex(.)&#39;, or set</span></span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co">#&gt; &#39;options(citation.bibtex.max=999)&#39;.</span></span></code></pre></div>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt; To cite sphunif in publications use:</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt;   García-Portugués, E. and Verdebout, T. (2026). sphunif: Uniformity</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt;   Tests on the Circle, Sphere, and Hypersphere. R package version</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt;   1.4.4. https://CRAN.R-project.org/package=sphunif</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt;   García-Portugués, E. and Verdebout, T. (2018). An overview of</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt;   uniformity tests on the hypersphere. arXiv:1804.00286.</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt;   https://arxiv.org/abs/1804.00286</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">#&gt; To see these entries in BibTeX format, use &#39;print(&lt;citation&gt;,</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#&gt; bibtex=TRUE)&#39;, &#39;toBibtex(.)&#39;, or set</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">#&gt; &#39;options(citation.bibtex.max=999)&#39;.</span></span></code></pre></div>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="unnumbered">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Garcia-Portugues2021" class="csl-entry">
 García-Portugués, E., P. Navarro-Esteban, and J. A. Cuesta-Albertos.
 2021. <span>“A <span>C</span>ramér–von <span>M</span>ises Test of
 Uniformity on the Hypersphere.”</span> In <em>Statistical Learning and
 Modeling in Data Analysis</em>, edited by S. Balzano, G. C. Porzio, R.
-Salvatore, D. Vistocco, and M. Vichi, 107–16. Studies in Classification,
-Data Analysis and Knowledge Organization. Cham: Springer. <a href="https://doi.org/10.1007/978-3-030-69944-4_12">https://doi.org/10.1007/978-3-030-69944-4_12</a>.
+Salvatore, D. Vistocco, and M. Vichi. Studies in Classification, Data
+Analysis and Knowledge Organization. Springer. <a href="https://doi.org/10.1007/978-3-030-69944-4_12">https://doi.org/10.1007/978-3-030-69944-4_12</a>.
 </div>
 <div id="ref-Garcia-Portugues2023" class="csl-entry">
-———. 2023. <span>“On a Projection-Based Class of Uniformity Tests on the
+García-Portugués, E., P. Navarro-Esteban, and J. A. Cuesta-Albertos.
+2023. <span>“On a Projection-Based Class of Uniformity Tests on the
 Hypersphere.”</span> <em>Bernoulli</em> 29 (1): 181–204. <a href="https://doi.org/10.3150/21-BEJ1454">https://doi.org/10.3150/21-BEJ1454</a>.
 </div>
 <div id="ref-Garcia-Portugues2018" class="csl-entry">
